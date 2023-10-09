@@ -5,11 +5,15 @@ public class Main {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         List<Agente> listaAgentes = new ArrayList<Agente>();
-
-        while(true){
+        boolean var = true;
+        while(var){
             int op;
-            System.out.println("Introduce una opción: \n 1. Crear nuevo agente\n 2. Crear Descendiente\n 3. Mandar Mensaje\n 4. Recibir mensaje\n 5. Eliminar agente\n 6. Ver lista de agentes");
+            System.out.println("Introduce una opción: \n 1. Crear nuevo agente\n 2. Crear Descendiente\n 3. Mandar Mensaje\n 4. Recibir mensaje\n 5. Eliminar agente\n 6. Ver lista de agentes\n 7. Salir");
             op = s.nextInt();
+            System.out.println("me cago: "+listaAgentes.size());
+            if (listaAgentes.size() == 10){
+                listaAgentes.remove(0);
+            }
             switch(op){
                 case 1:
                     System.out.println("Has elegido crear un nuevo agente. Por favor, indique el id de tu nuevo agente");
@@ -54,6 +58,16 @@ public class Main {
                             System.out.println("Id utilizado, se cancela la operación");
                         } else {
                             System.out.println("Añadiendo nuevo agente...");
+                            for(Agente a : listaAgentes){
+                                if (a.getId() == padre.getId()){
+                                    if(a.limDesc > 0){
+                                        a.nuevoDescendiente();
+                                        a.setFather(true);
+                                        hijo.setSon(true);
+                                        hijo.setPid(a.id);
+                                    }
+                                }
+                            }
                             listaAgentes.add(hijo);
                         }
                     } else{
@@ -90,8 +104,16 @@ public class Main {
                 case 6:
                     System.out.println("La lista de agentes es: \n");
                     for (Agente a : listaAgentes){
-                        System.out.println(a.getId());
+                        System.out.println("Id: "+a.getId());
+                        System.out.println("¿Es padre? "+a.isFather());
+                        System.out.println("¿Es hijo? "+a.isSon());
+                        if (a.isSon())
+                            System.out.println("Id padre: " + a.getPid());
+                        System.out.println("Hijos: "+(5-a.getLimDesc()));
                     }
+                    break;
+                case 7:
+                    var = false;
                     break;
                 default:
                     System.out.println("Opcion incorrecta");
