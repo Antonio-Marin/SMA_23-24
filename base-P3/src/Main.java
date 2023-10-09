@@ -10,7 +10,6 @@ public class Main {
             int op;
             System.out.println("Introduce una opción: \n 1. Crear nuevo agente\n 2. Crear Descendiente\n 3. Mandar Mensaje\n 4. Recibir mensaje\n 5. Eliminar agente\n 6. Ver lista de agentes\n 7. Salir");
             op = s.nextInt();
-            System.out.println("me cago: "+listaAgentes.size());
             if (listaAgentes.size() == 10){
                 listaAgentes.remove(0);
             }
