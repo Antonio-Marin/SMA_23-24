@@ -11,6 +11,9 @@ public class Agente {
     public void nuevoDescendiente(){
         this.limDesc -=1;
     }
+    public void borroDescendiente(){
+        this.limDesc +=1;
+    }
 
     public void setFather(boolean father) {
         this.isFather = father;
