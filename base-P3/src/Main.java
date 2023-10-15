@@ -79,10 +79,43 @@ public class Main {
                     }
                     break;
                 case 3:
-                    System.out.println("Has elegido enviar un mensaje");
+                    System.out.println("Has elegido enviar un mensaje. Por favor, indique el id del emisor y del receptor: ");
+                    int idEmisor = s.nextInt();
+                    int idReceptor = s.nextInt();
+
+                    Agente agenteEmisor = null;
+                    Agente agenteReceptor = null;
+
+                    for (Agente a : listaAgentes) {
+                        if (a.getId() == idEmisor) {
+                            agenteEmisor = a;
+                        }
+                        if (a.getId() == idReceptor) {
+                            agenteReceptor = a;
+                        }
+                    }
+
+                    if (agenteEmisor != null && agenteReceptor != null) {
+                        System.out.println("Ingrese el contenido del mensaje: ");
+                        s.nextLine(); // Consumir el salto de línea pendiente
+                        String contenidoMensaje = s.nextLine();
+
+                        Mensaje mensaje = new Mensaje(agenteEmisor, agenteReceptor, contenidoMensaje);
+                        mensaje.start();
+                    } else {
+                        System.out.println("El agente emisor o receptor no existe.");
+                    }
                     break;
                 case 4:
-                    System.out.println("Has elegido recibir un mensaje");
+                    System.out.println("Has elegido recibir un mensaje. Por favor, indique el id del receptor: ");
+                    int idReceptor2 = s.nextInt();
+                    Agente agenteReceptor2 = null;
+
+                    for (Agente a : listaAgentes) {
+                        if (a.getId() == idReceptor2) {
+                            agenteReceptor2 = a;
+                        }
+                    }
                     break;
                 case 5:
                     System.out.println("Has elegido eliminar un agente. Elige el id del agente que deseas eliminar: ");

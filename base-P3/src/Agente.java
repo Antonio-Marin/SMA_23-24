@@ -1,9 +1,14 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Agente {
     int id;
     boolean isFather=false;
     boolean isSon=false;
     int limDesc=5;
     int pid = 0;
+    List<String> mensajes = new ArrayList<>();
+
 
     public Agente(int id) {
         this.id = id;
@@ -44,5 +49,14 @@ public class Agente {
 
     public int getPid() {
         return pid;
+    }
+    public void enviarMensaje(String mensaje, Agente receptor) {
+
+        receptor.recibirMensaje(mensaje);
+    }
+
+    public String recibirMensaje(String mensaje) {
+        mensajes.add(mensaje);
+        return mensaje;
     }
 }
