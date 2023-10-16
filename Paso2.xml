@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Mensaje>
+    <inicio>
+        <emisor>
+            <id>34</id>
+            <ip>192.228.17.34</ip>
+            <puerto>15</puerto>
+        </emisor>
+        <receptor>
+            <id>85</id>
+            <ip>192.228.17.57</ip>
+            <puerto>10</puerto>
+        </receptor>
+        <paso>2</paso>
+    </inicio>
+
+    <cuerpo>
+        <cromosReq>Lapras</cromosReq>
+        <cromosOf>Piplup</cromosOf>
+        <dinero></dinero>
+        <afirmacion></afirmacion>
+    </cuerpo>
+</Mensaje>

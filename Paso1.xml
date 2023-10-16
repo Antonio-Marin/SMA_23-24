@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Mensaje>
+    <inicio>
+        <emisor>
+            <id>85</id>
+            <ip>192.228.17.57</ip>
+            <puerto>10</puerto>
+        </emisor>
+        <receptor>
+            <id>34</id>
+            <ip>192.228.17.34</ip>
+            <puerto>15</puerto>
+        </receptor>
+        <paso>1</paso>
+    </inicio>
+
+    <cuerpo>
+        <cromosReq>Squirtle Mewtwo Piplu Latias</cromosReq>
+        <cromosOf>Dugtrio Lapras Pikachu</cromosOf>
+        <dinero></dinero>
+        <afirmacion></afirmacion>
+    </cuerpo>
+</Mensaje>
