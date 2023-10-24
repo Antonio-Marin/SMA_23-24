@@ -1,5 +1,0 @@
-Pasos de mensaje:
-1. Inicio conversación
-2. Oferta intercambio
-3. Oferta compra
-4. Afirmación / Negación
