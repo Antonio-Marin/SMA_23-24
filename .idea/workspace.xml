@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ef0b2940-10e1-417e-b237-833f74f0f7e1" name="Changes" comment="Borro y cuenta nueva" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="agente" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="agente" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Antonio-Marin&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="deca3790-4eac-4600-a1e7-846d195d732d" />
+        <option name="url" value="https://github.com/Antonio-Marin/SMA_23-24.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2WWLtTaukwQ7yJJmD3cT0PtXvEP" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/Carrera/Sistema Multiagentes/Prácticas/Base proyecto/Profe",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\marti\IdeaProjects\SMA_23-24" />
+      <recent name="C:\Users\marti\IdeaProjects\SMA_23-24\base-P3\src" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ef0b2940-10e1-417e-b237-833f74f0f7e1" name="Changes" comment="" />
+      <created>1696843605464</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1696843605464</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Pruebas nombre">
+      <option name="closed" value="true" />
+      <created>1696844359816</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1696844359816</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Clase agente">
+      <option name="closed" value="true" />
+      <created>1696844977836</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1696844977836</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Agente get y set">
+      <option name="closed" value="true" />
+      <created>1696845672632</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1696845672632</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Cambio agente a src">
+      <option name="closed" value="true" />
+      <created>1696845876542</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1696845876542</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Cambio agente a src">
+      <option name="closed" value="true" />
+      <created>1696845959740</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1696845959740</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Agentes nuevas variables + funcionamiento en main">
+      <option name="closed" value="true" />
+      <created>1696891836189</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1696891836190</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Sussy error">
+      <option name="closed" value="true" />
+      <created>1696892077655</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1696892077655</updated>
+    </task>
+    <task id="LOCAL-00008" summary="metodo borroDesc">
+      <option name="closed" value="true" />
+      <created>1696933150056</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1696933150056</updated>
+    </task>
+    <task id="LOCAL-00009" summary="tratamiendo de hijos en los agentes">
+      <option name="closed" value="true" />
+      <created>1696933167510</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1696933167510</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Archivo xml de prueba">
+      <option name="closed" value="true" />
+      <created>1697476167711</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1697476167711</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Comentado case4 + pruebas de enviar un atributo del archivo xml">
+      <option name="closed" value="true" />
+      <created>1697476332679</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1697476332679</updated>
+    </task>
+    <task id="LOCAL-00012" summary="cambios">
+      <option name="closed" value="true" />
+      <created>1697476549588</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1697476549588</updated>
+    </task>
+    <task id="LOCAL-00013" summary="modificacion xml">
+      <option name="closed" value="true" />
+      <created>1697479689854</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1697479689854</updated>
+    </task>
+    <task id="LOCAL-00014" summary="ERROR, intento de envio de mensaje del archivo">
+      <option name="closed" value="true" />
+      <created>1697479729944</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1697479729944</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Añadidos archivos xmls y xsd">
+      <option name="closed" value="true" />
+      <created>1697479957713</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1697479957713</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Añadido archivo pasos.txt y reorganizados los archivos xml">
+      <option name="closed" value="true" />
+      <created>1697529706887</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1697529706887</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Protocolo de comunicacion del agente">
+      <option name="closed" value="true" />
+      <created>1698054318481</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1698054318481</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Borro y cuenta nueva">
+      <option name="closed" value="true" />
+      <created>1698141110354</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1698141110354</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Pruebas nombre" />
+    <MESSAGE value="Clase agente" />
+    <MESSAGE value="Agente get y set" />
+    <MESSAGE value="Cambio agente a src" />
+    <MESSAGE value="Agentes nuevas variables + funcionamiento en main" />
+    <MESSAGE value="Sussy error" />
+    <MESSAGE value="metodo borroDesc" />
+    <MESSAGE value="tratamiendo de hijos en los agentes" />
+    <MESSAGE value="Archivo xml de prueba" />
+    <MESSAGE value="Comentado case4 + pruebas de enviar un atributo del archivo xml" />
+    <MESSAGE value="cambios" />
+    <MESSAGE value="modificacion xml" />
+    <MESSAGE value="ERROR, intento de envio de mensaje del archivo" />
+    <MESSAGE value="Añadidos archivos xmls y xsd" />
+    <MESSAGE value="Añadido archivo pasos.txt y reorganizados los archivos xml" />
+    <MESSAGE value="Protocolo de comunicacion del agente" />
+    <MESSAGE value="Borro y cuenta nueva" />
+    <option name="LAST_COMMIT_MESSAGE" value="Borro y cuenta nueva" />
+  </component>
+</project>
