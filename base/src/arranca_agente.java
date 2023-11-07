@@ -52,7 +52,11 @@ public class arranca_agente {
 
     public static void main(String[] args) {
 
-        nuevo_agente = new Acc(args[0], args[1], args[2], args[3], args[4]);
+        Mensaje m = new Mensaje(null, null, 0, null, null, 0, null, null, null);
+
+        m.prueba();
+
+        //nuevo_agente = new Acc(args[0], args[1], args[2], args[3], args[4]);
         // Ej.: para arrancar el proceso :
 
         // Para un ACC monitor (que generara Accs cambiacromos descendientes)
