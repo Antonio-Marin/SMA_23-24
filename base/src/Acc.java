@@ -246,7 +246,7 @@ public class Acc {
         this.Rango_IPs = 0;
         this.Puerto_Inicio = 50000;
         this.Rango_Puertos = 10000;
-        this.localizacion_codigo = "D:/Datos/miki/Docencia/PracticasSMA/Codigo/cambiaCromos/2023_2024/out/production/2023-2024/";
+        this.localizacion_codigo = "C:/Users/marti/IdeaProjects/SMA_23-24/base/out/production/base"; //cambia segun quien lo ejecute
         this.tiempo_espera_fin_env = 1000 * 1; // Es el tiempo (milisegundos) que esperaremos para enviar los mensajen pendientes en la cola de envios, antes de finalizar el agente
 
         // //////////////////////////////////////
