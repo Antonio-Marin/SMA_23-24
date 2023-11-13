@@ -31,7 +31,6 @@ public class Acc {
     // Datos del agente
     protected String ID_propio; // Identificador unico de este agente
     protected String Ip_Propia;  // Ip donde reside este agente
-    protected int Puerto_Propio;  // Es el puerto asociado al agente (coincide con el puerto de servidor TCP del agente)
     protected int Puerto_Propio_TCP;  // Es el puerto de servidor TCP del agente (coincide con el puerto asociado al agente)
     protected int Puerto_Propio_UDP;  // Es el puerto de servidor UDP del agente (es el siguiente a "Puerto_Propio" osea - Puerto_Propio_UDP = Puerto_Propio+1)
     protected long Tiempo_de_nacimiento;  // La hora del sistema de esta maquina en la que se genera el agente
@@ -151,16 +150,15 @@ public class Acc {
         }
         else if (this.tipo_agente == tipos_de_agentes.MONITOR) {
             // Para el agente MONITOR los puertos vienen fijados al generar el agente
-            this.Puerto_Propio = this.Puerto_Monitor;
-            this.Puerto_Propio_TCP = this.Puerto_Propio;
-            this.Puerto_Propio_UDP = this.Puerto_Propio + 1;
+            this.Puerto_Propio_TCP = this.Puerto_Monitor;
+            this.Puerto_Propio_UDP = this.Puerto_Propio_TCP + 1;
 
             // Generamos los sockets de TCP y UDP en el monitor, ya que este sabe cuales son sus puerton y no usa "buscaNido()" para localizarse
             try {
                 servidor_TCP = new ServerSocket(Puerto_Propio_TCP);
                 servidor_UDP = new DatagramSocket(Puerto_Propio_UDP);
             } catch (Exception e) {
-                System.out.println("\n ==> ERROR. Desde Acc al abrir los puertos de comunicaciones con Puerto_Propio : " + Puerto_Propio +
+                System.out.println("\n ==> ERROR. Desde Acc al abrir los puertos de comunicaciones con Puerto_Propio : " + Puerto_Propio_TCP +
                         " - con Puerto_Propio_TCP : " + Puerto_Propio_TCP +
                         " - con Puerto_Propio_UDP : " + Puerto_Propio_UDP +
                         " - en el MONITOR");
@@ -313,9 +311,8 @@ public class Acc {
                 servidor_UDP = new DatagramSocket(puerto_busqueda + 1);
 
                 // Si hemos podido ocupar los dos puertos, ya son nuestros y por tanto anotamos nuestra localizacion
-                this.Puerto_Propio = puerto_busqueda;
-                this.Puerto_Propio_TCP = Puerto_Propio;
-                this.Puerto_Propio_UDP = Puerto_Propio +1;
+                this.Puerto_Propio_TCP = puerto_busqueda;
+                this.Puerto_Propio_UDP = Puerto_Propio_TCP +1;
 
                 // Si los dos puertos han funcionado, ya tenemos nido y podemos para de buscar
                 sigue_buscando = false;
@@ -328,7 +325,7 @@ public class Acc {
                         " - con T_actual : "+ T_actual +
                         " - con T_limite_busqueda : "+ T_limite_busqueda +
                         " - tiempo invertido (milisegundos) : "+ T_buscando+
-                        "\n - anidado en Puerto_Propio : "+ this.Puerto_Propio +
+                        "\n - anidado en Puerto_Propio : "+ this.Puerto_Propio_TCP +
                         " - Puerto_Propio_TCP : " + this.Puerto_Propio_TCP +
                         " - Puerto_Propio_UDP : " + this.Puerto_Propio_UDP);
 
@@ -394,7 +391,7 @@ public class Acc {
 
         String ID_mensaje = dame_codigo_id_local_men();
         String momento_actual = String.valueOf(System.currentTimeMillis());
-        String Puerto_Propio_str = String.valueOf(Puerto_Propio);
+        String Puerto_Propio_str = String.valueOf(Puerto_Propio_TCP);
         String Puerto_Monitor_UDP_str = String.valueOf(Puerto_Monitor_UDP);
         String cuerpo_mens = "Esto es el MENSAJE HE NACIDO  - que el agente con ID_propio : " + ID_propio +
                 " - con ip : " + Ip_Propia +
@@ -404,15 +401,12 @@ public class Acc {
                 " - con Puerto_Monitor : "+Puerto_Monitor_UDP_str+
                 " :  - en T : " + momento_actual;
 
-        Mensaje mensaje_he_nacido = new Mensaje(ID_mensaje,
-                Ip_Propia,
-                Puerto_Propio,
-                ID_propio,
-                Ip_Monitor,
-                Puerto_Monitor_UDP,
-                "monitor",
-                "UDP",
-                cuerpo_mens);
+        //TODO: mensaje nacer revisar
+        Mensaje mensaje_he_nacido = new Mensaje("1",
+                ID_mensaje, "Nacimiento", "Envio información al monitor", "UDP",
+                ID_propio, Ip_Propia, Integer.toString(Puerto_Propio_TCP+1), Puerto_Propio_str, momento_actual,
+                "ID_Monitor", Ip_Monitor, Puerto_Monitor_UDP_str, Integer.toString(Puerto_Monitor_TCP), momento_actual);
+        mensaje_he_nacido.setBodyInfo(cuerpo_mens);
 
         // Insertamos el mensaje
         pon_en_lita_enviar(mensaje_he_nacido);
@@ -421,7 +415,7 @@ public class Acc {
         String Tiempo_de_nacimiento_str = String.valueOf(this.Tiempo_de_nacimiento);
         System.out.println("\n ==> Ha nacido un agente en la IP = "+Ip_Propia+
                                 " - con ID_propio :" + this.ID_propio +
-                                " - en el puerto :" + this.Puerto_Propio +
+                                " - en el puerto :" + this.Puerto_Propio_TCP +
                                 " - Su generación es :" + Num_generacion_str +
                                 " - t de generación :" + Tiempo_de_nacimiento_str);
     } // Fin de - protected void notificaNacimiento() {
@@ -447,7 +441,7 @@ public class Acc {
         long momento_actual = System.currentTimeMillis();
         String momento_actual_str = String.valueOf(System.currentTimeMillis());
         String tiempo_vivido =  String.valueOf(System.currentTimeMillis() - Tiempo_de_nacimiento);
-        String Puerto_Propio_str = String.valueOf(Puerto_Propio);
+        String Puerto_Propio_str = String.valueOf(Puerto_Propio_TCP);
         String Puerto_Monitor_TCP_str = String.valueOf(Puerto_Monitor_TCP);
         String cuerpo_mens_fin_agente = "Esto es el MENSAJE FIN DE AGENTE  - que el agente con ID_propio : " + ID_propio +
                 " - con ip : " + Ip_Propia +
@@ -459,15 +453,12 @@ public class Acc {
                 " - con T de vida : " + Tiempo_de_vida +
                 " - con T vivido : " + tiempo_vivido;
 
-        Mensaje mensaje_fin_agente = new Mensaje(ID_mensaje,
-                Ip_Propia,
-                Puerto_Propio,
-                ID_propio,
-                Ip_Monitor,
-                Puerto_Monitor_TCP,
-                "monitor",
-                "TCP",
-                cuerpo_mens_fin_agente);
+        //TODO: mensaje muerte revisar
+        Mensaje mensaje_fin_agente = new Mensaje("1",
+                ID_mensaje, "Destrucción", "Envio información al monitor", "TCP",
+                ID_propio, Ip_Propia, Integer.toString(Puerto_Propio_TCP+1), Puerto_Propio_str, momento_actual_str,
+                "ID_Monitor", Ip_Monitor, Integer.toString(Puerto_Monitor_TCP+1), Integer.toString(Puerto_Monitor_TCP), momento_actual_str);
+        mensaje_fin_agente.setBodyInfo(cuerpo_mens_fin_agente);
 
         // Insertamos el mensaje
         pon_en_lita_enviar(mensaje_fin_agente);
