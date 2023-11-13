@@ -92,16 +92,18 @@ public class FuncionDeAgente implements Runnable {
                     // Construimos el mensaje
                     num_men_enviados_fa = num_men_enviados_fa + 1;
                     String IP_or = agente.Ip_Propia;
-                    int puerto_or = agente.Puerto_Propio;
+                    int puertoTCP_or = agente.Puerto_Propio_TCP;
+                    int puertoUDP_or = agente.Puerto_Propio_UDP;
                     String id_or = agente.ID_propio;
                     String IP_dest = otro_agente.IP;
-                    int puerto_dest = otro_agente.puerto;
+                    int puertoTCP_dest = otro_agente.puerto;
+                    int puertoUDP_dest = otro_agente.puerto+1;
                     String id_dest = otro_agente.ID;
                     String protocolo = "UDP";
 
                     String ID_mensaje = agente.dame_codigo_id_local_men();
                     String momento_actual = String.valueOf(System.currentTimeMillis());
-                    String puerto_dest_str = String.valueOf(puerto_dest);
+                    String puerto_dest_str = String.valueOf(puertoTCP_dest);
                     String cuerpo_mens = "Esto es el MENSAJE num = " + num_men_enviados_fa +
                             " - que el agente : " + agente.ID_propio +
                             " - con ip " + agente.Ip_Propia +
@@ -111,15 +113,10 @@ public class FuncionDeAgente implements Runnable {
                             " - con puerto_dest = "+puerto_dest_str+
                             " :  - en T = " + momento_actual;
 
-                    Mensaje nuevo_mensaje = new Mensaje(ID_mensaje,
-                            IP_or,
-                            puerto_or,
-                            id_or,
-                            IP_dest,
-                            puerto_dest,
-                            id_dest,
-                            protocolo,
-                            cuerpo_mens);
+                    Mensaje nuevo_mensaje = new Mensaje("1",
+                            ID_mensaje, "Nacimiento", "Envio información al monitor", protocolo,
+                            id_or, IP_or, Integer.toString(puertoUDP_or), Integer.toString(puertoTCP_or), momento_actual,
+                            id_dest, IP_dest, Integer.toString(puertoUDP_dest), Integer.toString(puertoTCP_dest), momento_actual);
 
                     // Enviamos el mensaje a la cola de envíos
                     enviaMensaje(nuevo_mensaje);
@@ -146,7 +143,7 @@ public class FuncionDeAgente implements Runnable {
         String momento_actual = String.valueOf(System.currentTimeMillis());
         System.out.println("Desde procesaMensajeRecibido. El agenteagente : "+agente.ID_propio+
                                     " - con ip "+agente.Ip_Propia+
-                                    " - ha recibido el mensaje  : "+ mensajeRecibido.cuerpo_del_mensaje+
+                                    " - ha recibido el mensaje  : "+ mensajeRecibido.bodyInfo+
                                     " - ordinal = "+num_men_recibidos_fa+
                                     " - en T = "+momento_actual);
     } // Fin de - void recogeMensajeRecibido() {
@@ -169,7 +166,7 @@ public class FuncionDeAgente implements Runnable {
         String momento_actual = String.valueOf(System.currentTimeMillis());
         System.out.println("Desde generaMensajeAEnviar. El agenteagente : "+agente.ID_propio+
                                     " - con ip "+agente.Ip_Propia+
-                                    " - envia el mensaje  : "+ nuevo_mensaje.cuerpo_del_mensaje+
+                                    " - envia el mensaje  : "+ nuevo_mensaje.bodyInfo+
                                     " - ordinal = "+num_men_enviados_fa+
                                     " - en T = "+momento_actual);
     } // Fin de - void enviaMensaje(Mensaje nuevo_mensaje) {

@@ -120,7 +120,7 @@ public class ComportamientoBase implements Runnable{
     void GenerarNuevoAcc(String nuevo_ID_propio, String nuevo_generacion, String nuevo_tipo_agente, String nuevo_Ip_Monitor, String nuevo_Puerto_Monitor) {
         System.out.println("\n ==> Desde el agente con id  : "+agente.ID_propio+
                                                     " - en la ip : "+agente.Ip_Propia+
-                                                    " - en el puerto : "+agente.Puerto_Propio+
+                                                    " - en el puerto : "+agente.Puerto_Propio_TCP+
                                                     " \n -> Generando Nuevo hijo con nuevo_ID_propio : "+nuevo_ID_propio+
                                                     " - con  nuevo_tipo_agente :  "+nuevo_tipo_agente+
                                                     " - con  nuevo_Ip_Monitor :  "+nuevo_Ip_Monitor+
@@ -144,7 +144,7 @@ public class ComportamientoBase implements Runnable{
         } catch (Exception e) {
             System.out.println("ERROR en GenerarNuevoAcc. Desde el agente con id  : "+agente.ID_propio+
                                                         " - en la ip "+agente.Ip_Propia+
-                                                        " - en la ip "+agente.Puerto_Propio+
+                                                        " - en la ip "+agente.Puerto_Propio_TCP+
                                                         " -- Generando Nuevo hijo con nuevo_ID_propio : "+nuevo_ID_propio+
                                                         " - con  nuevo_tipo_agente :  "+nuevo_tipo_agente+
                                                         " - con  nuevo_Ip_Monitor :  "+nuevo_Ip_Monitor+

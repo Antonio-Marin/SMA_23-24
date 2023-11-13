@@ -87,20 +87,17 @@ public class RecibeTcp extends Thread {
                 String protocolo = "TCP";
                 String cuerpo_mens = texto_recibido_TCP;
 
-                Mensaje mensaje_recibido_TCP = new Mensaje("El ID_mensaje viene en el cuerpo del mensaje",
-                        IP_or,
-                        puerto_or,
-                        id_or,
-                        IP_dest,
-                        puerto_dest,
-                        id_dest,
-                        protocolo,
-                        cuerpo_mens);
+                String momento_actual = String.valueOf(System.currentTimeMillis());
 
+                Mensaje mensaje_recibido_TCP = new Mensaje("1",
+                        "El ID_mensaje viene en el cuerpo del mensaje", "mensaje_recibido_TCP", "Envio información", protocolo,
+                        id_or, IP_or, Integer.toString(puerto_or+1), Integer.toString(puerto_or), momento_actual,
+                        id_dest, IP_dest, Integer.toString(puerto_dest+1), Integer.toString(puerto_or), momento_actual);
+                mensaje_recibido_TCP.setBodyInfo(cuerpo_mens);
 
                 // Llevamos el mensaje al contenedor de recibidos
                     agente.pon_en_lita_recibidos(mensaje_recibido_TCP);
-                    System.out.println("\n ==> Desde RecibeTcp, el agente : "+agente.Ip_Propia+" - IP : "+agente.ID_propio+ "\n - HA RECIBIDO EL MENSAJE : " + mensaje_recibido_TCP.cuerpo_del_mensaje +
+                    System.out.println("\n ==> Desde RecibeTcp, el agente : "+agente.Ip_Propia+" - IP : "+agente.ID_propio+ "\n - HA RECIBIDO EL MENSAJE : " + mensaje_recibido_TCP.bodyInfo +
                             "\n - en contenedor recibidos tenemos : " + String.valueOf(agente.num_elem_lita_recibidos()) +
                             " - total recibidos : " + agente.num_elem_lita_recibidos());
                     // Cerramos los sockets

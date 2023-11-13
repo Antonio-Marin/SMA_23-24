@@ -87,15 +87,15 @@ public class FuncionMonitor implements Runnable {
 
         num_men_recibidos_monitor++;
         String momento_actual_str = String.valueOf(System.currentTimeMillis());
-        String puerto_origen_str = String.valueOf(mensajeRecibido.puerto_origen);
+        String puerto_origen_str = String.valueOf(mensajeRecibido.originPortUDP);
 
         System.out.println(" => DESDE EL MONITOR. Con num rec : " + num_men_recibidos_monitor +
                                     " - en T : " +momento_actual_str +
-                                    " - El agente : "+ mensajeRecibido.id_origen +
-                                    " - desde la ip : "+ mensajeRecibido.IP_origen +
+                                    " - El agente : "+ mensajeRecibido.originId +
+                                    " - desde la ip : "+ mensajeRecibido.originIp +
                                     " - puerto : "+ puerto_origen_str +
-                                    " - protocolo : "+ mensajeRecibido.protocolo +
-                                    " - envio el mensaje \n  * Mensaje recibido : "+ mensajeRecibido.cuerpo_del_mensaje);
+                                    " - protocolo : "+ mensajeRecibido.comunicationProtocol +
+                                    " - envio el mensaje \n  * Mensaje recibido : "+ mensajeRecibido.bodyInfo);
     } // Fin de - void recogeMensajeRecibido() {
 
 
