@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Es clase desde la que se arranca el proceso de Agente
  * @author MAFG y Varios alumnos 2022-2023
@@ -52,17 +54,80 @@ public class arranca_agente {
 
     public static void main(String[] args) {
 
-        Mensaje m = new Mensaje(null, null, 0, null, null, 0, null, null, null);
+        //Prueba ejemplo fichero xml
+//        Mensaje m = new Mensaje("1", "1", "Intercambio", "Oferta", "UDP",
+//                "ag1_id", "1.1.1.1", "10", "10", "12/10/2023 20:45:35",
+//                "ag2_id", "2.2.2.2", "10", "10", "12/10/2023 20:45:35");
+//        AccTest a1 = new AccTest("ag1_id","1.1.1.1",10);
+//        AccTest a2 = new AccTest("ag2_id","2.2.2.2",20);
+//        AccTest a3 = new AccTest("ag3_id");
+//        AccTest a4 = new AccTest("ag4_id");
+//
+//        ArrayList<AccTest> agentsDirectory = new ArrayList<AccTest>();
+//        agentsDirectory.add(a1);
+//        agentsDirectory.add(a2);
+//        ArrayList<AccTest> deadAgents = new ArrayList<AccTest>();
+//        deadAgents.add(a3);
+//        deadAgents.add(a4);
+//
+//        ArrayList<String> ownedCardType = new ArrayList<String>();
+//        ownedCardType.add("Pikachu");
+//        ownedCardType.add("Chikorita");
+//        ArrayList<String> ownedCardQuantity= new ArrayList<String>();
+//        ownedCardQuantity.add("3");
+//        ownedCardQuantity.add("2");
+//        ArrayList<String> ownedCardCost= new ArrayList<String>();
+//        ownedCardCost.add("10");
+//        ownedCardCost.add("20");
+//        ArrayList<String> wantedCardType= new ArrayList<String>();
+//        wantedCardType.add("Mew");
+//        wantedCardType.add("Bidoof");
+//
+//        ArrayList<String> offeredCardType = new ArrayList<String>();
+//        offeredCardType.add("Pikachu");
+//        offeredCardType.add("Chikorita");
+//        ArrayList<String> offeredCardQuantity= new ArrayList<String>();
+//        offeredCardQuantity.add("3");
+//        offeredCardQuantity.add("3");
+//        ArrayList<String> offeredCardCost= new ArrayList<String>();
+//        offeredCardCost.add("10");
+//        offeredCardCost.add("10");
+//        ArrayList<String> wishedCardType= new ArrayList<String>();
+//        wishedCardType.add("Mew");
+//        wishedCardType.add("Bidoof");
+//
+//        m.setAgentsDirectory(agentsDirectory);
+//        m.setDeadAgents(deadAgents);
+//        m.setBodyInfo("Mensaje de texto");
+//        m.setOwnedCardType(ownedCardType);
+//        m.setOwnedCardQuantity(ownedCardQuantity);
+//        m.setOwnedCardCost(ownedCardCost);
+//        m.setWantedCardType(wantedCardType);
+//        m.setOwnedMoney("200");
+//        m.setCreatedChilds("20");
+//        m.setDeathTime("-");
+//        m.setPastTradeGivenCard("-");
+//        m.setPastTradeWantedCard("-");
+//        m.setTradeWantedCard("X");
+//        m.setTradeGivenCard("Y");
+//        m.setOfferedCardType(offeredCardType);
+//        m.setOfferedCardQuantity(offeredCardQuantity);
+//        m.setOfferedCardCost(offeredCardCost);
+//        m.setWishedCardType(wishedCardType);
+//        m.setTradeMoney("20");
+//
+//        m.crearXML();
+        //m.prueba();
 
-        m.prueba();
+        //Codigo ejecución agente
+        nuevo_agente = new Acc(args[0], args[1], args[2], args[3], args[4]); //creado arriba
 
-        //nuevo_agente = new Acc(args[0], args[1], args[2], args[3], args[4]);
-        // Ej.: para arrancar el proceso :
+        //Ej.: para arrancar el proceso :
 
-        // Para un ACC monitor (que generara Accs cambiacromos descendientes)
-        // d:/..desde_el_directorio_coresponiente/java arranca_agente "nombre_agente_monitor_raiz" 1 "MONITOR" "ip monitor" "puerto monitor"
+         //Para un ACC monitor (que generara Accs cambiacromos descendientes)
+         //d:/..desde_el_directorio_coresponiente/java arranca_agente "nombre_agente_monitor_raiz" 1 "MONITOR" "ip monitor" "puerto monitor"
 
-        // Para un ACC CAMBIACROMOS (que generara Accs cambiacromos descendientes)
-        // d:/..desde_el_directorio_coresponiente/java arranca_agente "nombre_agente_raiz" 1 "CAMBIACROMOS" "ip monitor" "puerto monitor"
+         //Para un ACC CAMBIACROMOS (que generara Accs cambiacromos descendientes)
+         //d:/..desde_el_directorio_coresponiente/java arranca_agente "nombre_agente_raiz" 1 "CAMBIACROMOS" "ip monitor" "puerto monitor"
     }
 }
