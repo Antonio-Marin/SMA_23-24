@@ -1,0 +1,184 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Message">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="xs:integer" name="comunc_id"/>
+        <xs:element type="xs:integer" name="msg_id"/>
+        
+        <xs:element name="header">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:integer" name="type_protocol"/>
+              <xs:element type="xs:integer" name="protocol_step"/>
+              <xs:element type="xs:string" name="comunication_protocol"/>
+
+              <xs:element type="header_origin_info" name="origin"/>
+
+              <xs:element type="header_destination_info" name="destination"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="body">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="body_info"/>
+
+              <xs:element name="death_content">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:integer" name="death_reason"/>
+
+                    <xs:element name="death_agent_info">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="owned_cards">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element type="death_owned_card" name="owned_card" maxOccurs="unbounded"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+
+                          <xs:element name="wanted_cards">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element type="death_wanted_card" name="wanted_card" maxOccurs="unbounded"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+
+                          <xs:element type="xs:integer" name="owned_money"/>
+                          <xs:element type="xs:integer" name="created_childs"/>
+                          <xs:element type="xs:long" name="death_time"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+
+              <xs:element name="trade_content">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="past_trade_wanted_card"/>
+                    <xs:element type="xs:string" name="past_trade_given_card"/>
+                    <xs:element type="xs:string" name="trade_wanted_card"/>
+                    <xs:element type="xs:string" name="trade_given_card"/>
+
+                    <xs:element name="offered_cards">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="trade_offered_card" name="offered_card" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+
+                    <xs:element name="wished_cards">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="trade_wished_card" name="wished_card" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+
+                    <xs:element type="xs:integer" name="trade_money"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="common_content">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="agents_directory">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="dir_agent" name="acc" maxOccurs="unbounded"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+
+              <xs:element name="dead_agents">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="dead_agent" name="dead_acc" maxOccurs="unbounded"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="header_origin_info">
+    <xs:sequence>
+        <xs:element type="xs:string" name="origin_id"/>
+        <xs:element type="xs:string" name="origin_ip"/>
+        <xs:element type="xs:integer" name="origin_port_UDP"/>
+        <xs:element type="xs:integer" name="origin_port_TCP"/>
+        <xs:element type="xs:long" name="origin_time"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="header_destination_info">
+    <xs:sequence>
+        <xs:element type="xs:string" name="destination_id"/>
+        <xs:element type="xs:string" name="destination_ip"/>
+        <xs:element type="xs:integer" name="destination_port_UDP"/>
+        <xs:element type="xs:integer" name="destination_port_TCP"/>
+        <xs:element type="xs:long" name="destination_time"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="death_owned_card">
+    <xs:sequence>
+        <xs:element type="xs:string" name="owned_card_type"/>
+        <xs:element type="xs:integer" name="owned_card_quantity"/>
+        <xs:element type="xs:integer" name="owned_card_cost"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="death_wanted_card">
+    <xs:sequence>
+        <xs:element type="xs:string" name="wanted_card_type"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="trade_offered_card">
+    <xs:sequence>
+        <xs:element type="xs:string" name="offered_card_type"/>
+        <xs:element type="xs:integer" name="offered_card_quantity"/>
+        <xs:element type="xs:integer" name="offered_card_cost"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="trade_wished_card">
+    <xs:sequence>
+        <xs:element type="xs:string" name="wished_card_type"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="dir_agent">
+    <xs:sequence>
+        <xs:element type="xs:string" name="id"/>
+        <xs:element type="xs:integer" name="port_UDP"/>
+        <xs:element type="xs:integer" name="port_TCP"/>
+        <xs:element type="xs:string" name="ip"/>
+    </xs:sequence>
+  </xs:complexType> 
+  
+  <xs:complexType name="dead_agent">
+    <xs:sequence>
+        <xs:element type="xs:string" name="id"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>

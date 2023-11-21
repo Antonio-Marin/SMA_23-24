@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Message>
+    <comunc_id>1</comunc_id>
+    <msg_id>1</msg_id>
+    <header>
+        <!-- Tipo de protocolo -->
+        <!-- 0: Identificacion -->
+            <!-- Paso -->
+            <!-- 0: ag1 se identifica a posible ag2 -->
+            <!-- 1: ag2 confirma que es agente y contesta a ag1 -->
+
+        <!-- 1: Nacimiento -->
+            <!-- Paso -->
+            <!-- 0: envio informacion a Monitor -->
+
+        <!-- 2: Destruccion -->
+            <!-- Paso -->
+            <!-- 0: envia informacion a Monitor -->
+            <!-- 0: envia informacion a Agente -->
+
+        <!-- 3: Intercambio -->
+            <!-- Paso -->
+            <!-- 0: ag1 envia ofrecidos y deseados a ag2 -->
+            <!-- 1: ag2 envia oferta a ag1 -->
+            <!-- 2: ag1 o ag2 aceptan intercambio -->
+            <!-- 3: ag1 o ag2 cambian oferta -->
+            <!-- 4: ag1 o ag2 rechaza y acaba la conexion -->
+            
+        <type_protocol>3c</type_protocol>
+        <protocol_step>0</protocol_step>
+        <comunication_protocol>UDP</comunication_protocol>
+
+        <origin>
+            <origin_id>ag1_id</origin_id>
+            <origin_ip>1.1.1.1</origin_ip>
+            <origin_port_UDP>10</origin_port_UDP>
+            <origin_port_TCP>10</origin_port_TCP>
+            <origin_time>1</origin_time>
+        </origin>
+
+        <destination>
+            <destination_id>ag2_id</destination_id>
+            <destination_ip>localhost</destination_ip>
+            <destination_port_UDP>10</destination_port_UDP>
+            <destination_port_TCP>8081</destination_port_TCP>
+            <destination_time>1</destination_time>
+        </destination>
+    </header>
+
+    <body>
+        <body_info>Mensaje de texto</body_info>
+        <death_content>
+            <death_reason>
+            0
+                <!-- Cumplimentacion de la lista de cromos deseados -->
+                <!-- Fin limite de tiempo de vida -->
+            </death_reason>
+
+            <death_agent_info>
+                <owned_cards>
+                    <owned_card>
+                        <owned_card_type>Pikachu</owned_card_type>
+                        <owned_card_quantity>3</owned_card_quantity>
+                        <owned_card_cost>10c</owned_card_cost>
+                    </owned_card>
+                    <owned_card>
+                        <owned_card_type>Chikorita</owned_card_type>
+                        <owned_card_quantity>2</owned_card_quantity>
+                        <owned_card_cost>20</owned_card_cost>
+                    </owned_card>
+                </owned_cards>
+                
+                <wanted_cards>
+                    <wanted_card>
+                        <wanted_card_type>Mew</wanted_card_type>
+                    </wanted_card>
+                    <wanted_card>
+                        <wanted_card_type>Bidoof</wanted_card_type>
+                    </wanted_card>
+                </wanted_cards>
+
+                <owned_money>200</owned_money>
+                <created_childs>20</created_childs>
+                <death_time>-1</death_time>
+            </death_agent_info>
+        </death_content>
+        
+        <trade_content>
+            <past_trade_wanted_card> - </past_trade_wanted_card>
+            <past_trade_given_card> - </past_trade_given_card>
+            <trade_wanted_card>X</trade_wanted_card>
+            <trade_given_card>Y</trade_given_card>
+            <offered_cards>
+
+            </offered_cards>
+
+            <wished_cards>
+                <wished_card>
+                    <wished_card_type>Mew</wished_card_type>
+                </wished_card>
+                <wished_card>
+                    <wished_card_type>Bidoof</wished_card_type>
+                </wished_card>
+            </wished_cards>
+
+            <!-- Este campo se entiende como el dinero que pide a cambio del agente originario para realizar el intercambio -->
+            <trade_money>20</trade_money> 
+        </trade_content>
+
+    </body>
+
+    <common_content>
+        <agents_directory>
+            <acc>
+                <id>ag1_id</id>
+				<port_UDP>10</port_UDP>
+				<port_TCP>11</port_TCP>
+                <ip>1.1.1.1</ip>
+            </acc>
+
+            <acc>
+                <id>ag2_id</id>
+				<port_UDP>20</port_UDP>
+				<port_TCP>21</port_TCP>
+                <ip>2.2.2.2</ip>
+            </acc>
+        </agents_directory>
+
+        <dead_agents>
+            <dead_acc>
+                <id>ag3_id</id>
+            </dead_acc>
+            <dead_acc>
+                <id>ag4_id</id>
+            </dead_acc>
+        </dead_agents>
+    </common_content>
+</Message>
