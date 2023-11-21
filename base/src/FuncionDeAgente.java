@@ -137,15 +137,23 @@ public class FuncionDeAgente implements Runnable {
     void recogeMensajeRecibido() {
         // Obtenemos el mensaje
         Mensaje mensajeRecibido = agente.saca_de_lita_recibidos();
-        num_men_recibidos_fa = num_men_recibidos_fa + 1;
+        mensajeRecibido.crearXML();
+        TratarXML test = new TratarXML();
+        String archivo_xml = "xml_"+ mensajeRecibido.comuncId +".xml";
+        String archivo_xsd = "ESQUEMA_XML_PROTOCOLO_COMUNICACION.xsd";
+        if(test.validarXMLConEsquema(archivo_xml, archivo_xsd)) {
+            num_men_recibidos_fa = num_men_recibidos_fa + 1;
 
-        // Lo notificamos (para PRUEBAS)
-        String momento_actual = String.valueOf(System.currentTimeMillis());
-        System.out.println("Desde procesaMensajeRecibido. El agenteagente : "+agente.ID_propio+
-                                    " - con ip "+agente.Ip_Propia+
-                                    " - ha recibido el mensaje  : "+ mensajeRecibido.bodyInfo+
-                                    " - ordinal = "+num_men_recibidos_fa+
-                                    " - en T = "+momento_actual);
+            // Lo notificamos (para PRUEBAS)
+            String momento_actual = String.valueOf(System.currentTimeMillis());
+            System.out.println("Desde procesaMensajeRecibido. El agenteagente : " + agente.ID_propio +
+                    " - con ip " + agente.Ip_Propia +
+                    " - ha recibido el mensaje  : " + mensajeRecibido.bodyInfo +
+                    " - ordinal = " + num_men_recibidos_fa +
+                    " - en T = " + momento_actual);
+        }else{
+            System.out.println("Mensaje erróneo");
+        }
     } // Fin de - void recogeMensajeRecibido() {
 
     /**

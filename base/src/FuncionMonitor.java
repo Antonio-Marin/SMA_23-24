@@ -60,7 +60,9 @@ public class FuncionMonitor implements Runnable {
             // //////////////////////////////////////
             // Obtenemos los mensajes recibidos
                 // Miramos si hay algun mensaje recibido y si lo hay lo recogemos
-            if(agente.num_elem_lita_recibidos() > 0) {
+            //System.out.println("no hay mensaje");
+            if(this.agente.num_elem_lita_recibidos() > 0) {
+                System.out.println("He llegado aqui");
             recogeMensajeRecibido();
             }
         } // Fin de while(true){
@@ -84,6 +86,7 @@ public class FuncionMonitor implements Runnable {
         System.out.println(" => DESDE EL MONITOR. Vamos  a recogeMensajeRecibido. Con : " + agente.num_elem_lita_recibidos() + "mensajes en cola");
         // Obtenemos el mensaje
         Mensaje mensajeRecibido = agente.saca_de_lita_recibidos();
+        mensajeRecibido.crearXML();
 
         num_men_recibidos_monitor++;
         String momento_actual_str = String.valueOf(System.currentTimeMillis());

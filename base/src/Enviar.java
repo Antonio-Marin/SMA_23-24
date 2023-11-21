@@ -65,13 +65,33 @@ public class Enviar extends Thread {
                 // Si el agente no tiene mensajes para enviar, se para 1s antes de mirar otra vez
                 if (agente.num_elem_lita_enviar() >0) {
                     Mensaje mensajeAEnviar = agente.saca_de_lita_enviar();
+
                     String protocolo_mensaje = mensajeAEnviar.getComunicationProtocol();
                     // Dependiendo del protocolo, enviamos el mensaje de una forma u otra
                     if (protocolo_mensaje.equals("TCP")) {
-                        EnviaTcp(mensajeAEnviar);
+                        mensajeAEnviar.crearXML();
+                        TratarXML test = new TratarXML();
+                        String archivo_xml = "xml_"+ mensajeAEnviar.comuncId +".xml";
+                        String archivo_xsd = "ESQUEMA_XML_PROTOCOLO_COMUNICACION.xsd";
+                        if(test.validarXMLConEsquema(archivo_xml,archivo_xsd)){
+                            EnviaTcp(mensajeAEnviar);
+                            System.out.println("Mensaje enviado");
+                        } else{
+                            System.out.println("Mensaje no valido");
+                        }
                     }
                     else if(protocolo_mensaje.equals("UDP")){
-                        EnviaUdp(mensajeAEnviar);
+
+                        mensajeAEnviar.crearXML();
+                        TratarXML test = new TratarXML();
+                        String archivo_xml = "xml_"+ mensajeAEnviar.comuncId +".xml";
+                        String archivo_xsd = "ESQUEMA_XML_PROTOCOLO_COMUNICACION.xsd";
+                        if(test.validarXMLConEsquema(archivo_xml,archivo_xsd)){
+                            EnviaUdp(mensajeAEnviar);
+                            System.out.println("Mensaje enviado");
+                        } else{
+                            System.out.println("Mensaje no valido");
+                        }
                     }
                     else {
                         System.out.println("\n ==> Desde public class Enviar. ERROR. Protocolo desconocido : "+ protocolo_mensaje);

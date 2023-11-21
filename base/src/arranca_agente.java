@@ -54,69 +54,70 @@ public class arranca_agente {
 
     public static void main(String[] args) {
 
-        //Prueba ejemplo fichero xml
-//        Mensaje m = new Mensaje("1", "1", "Intercambio", "Oferta", "UDP",
-//                "ag1_id", "1.1.1.1", "10", "10", "12/10/2023 20:45:35",
-//                "ag2_id", "2.2.2.2", "10", "10", "12/10/2023 20:45:35");
-//        AccTest a1 = new AccTest("ag1_id","1.1.1.1",10);
-//        AccTest a2 = new AccTest("ag2_id","2.2.2.2",20);
-//        AccTest a3 = new AccTest("ag3_id");
-//        AccTest a4 = new AccTest("ag4_id");
-//
-//        ArrayList<AccTest> agentsDirectory = new ArrayList<AccTest>();
-//        agentsDirectory.add(a1);
-//        agentsDirectory.add(a2);
-//        ArrayList<AccTest> deadAgents = new ArrayList<AccTest>();
-//        deadAgents.add(a3);
-//        deadAgents.add(a4);
-//
-//        ArrayList<String> ownedCardType = new ArrayList<String>();
-//        ownedCardType.add("Pikachu");
-//        ownedCardType.add("Chikorita");
-//        ArrayList<String> ownedCardQuantity= new ArrayList<String>();
-//        ownedCardQuantity.add("3");
-//        ownedCardQuantity.add("2");
-//        ArrayList<String> ownedCardCost= new ArrayList<String>();
-//        ownedCardCost.add("10");
-//        ownedCardCost.add("20");
-//        ArrayList<String> wantedCardType= new ArrayList<String>();
-//        wantedCardType.add("Mew");
-//        wantedCardType.add("Bidoof");
-//
-//        ArrayList<String> offeredCardType = new ArrayList<String>();
-//        offeredCardType.add("Pikachu");
-//        offeredCardType.add("Chikorita");
-//        ArrayList<String> offeredCardQuantity= new ArrayList<String>();
-//        offeredCardQuantity.add("3");
-//        offeredCardQuantity.add("3");
-//        ArrayList<String> offeredCardCost= new ArrayList<String>();
-//        offeredCardCost.add("10");
-//        offeredCardCost.add("10");
-//        ArrayList<String> wishedCardType= new ArrayList<String>();
-//        wishedCardType.add("Mew");
-//        wishedCardType.add("Bidoof");
-//
-//        m.setAgentsDirectory(agentsDirectory);
-//        m.setDeadAgents(deadAgents);
-//        m.setBodyInfo("Mensaje de texto");
-//        m.setOwnedCardType(ownedCardType);
-//        m.setOwnedCardQuantity(ownedCardQuantity);
-//        m.setOwnedCardCost(ownedCardCost);
-//        m.setWantedCardType(wantedCardType);
-//        m.setOwnedMoney("200");
-//        m.setCreatedChilds("20");
-//        m.setDeathTime("-");
-//        m.setPastTradeGivenCard("-");
-//        m.setPastTradeWantedCard("-");
-//        m.setTradeWantedCard("X");
-//        m.setTradeGivenCard("Y");
-//        m.setOfferedCardType(offeredCardType);
-//        m.setOfferedCardQuantity(offeredCardQuantity);
-//        m.setOfferedCardCost(offeredCardCost);
-//        m.setWishedCardType(wishedCardType);
-//        m.setTradeMoney("20");
-//
-//        m.crearXML();
+      //Prueba ejemplo fichero xml
+/*        Mensaje m = new Mensaje("1", "1", "Intercambio", "Oferta", "UDP",
+                "ag1_id", "1.1.1.1", "10", "10", "12/10/2023 20:45:35",
+                "ag2_id", "2.2.2.2", "10", "10", "12/10/2023 20:45:35");
+        AccTest a1 = new AccTest("ag1_id","1.1.1.1",10);
+        AccTest a2 = new AccTest("ag2_id","2.2.2.2",20);
+        AccTest a3 = new AccTest("ag3_id");
+        AccTest a4 = new AccTest("ag4_id");
+
+        ArrayList<AccTest> agentsDirectory = new ArrayList<AccTest>();
+        agentsDirectory.add(a1);
+        agentsDirectory.add(a2);
+        ArrayList<AccTest> deadAgents = new ArrayList<AccTest>();
+        deadAgents.add(a3);
+        deadAgents.add(a4);
+
+        ArrayList<String> ownedCardType = new ArrayList<String>();
+        ownedCardType.add("Pikachu");
+        ownedCardType.add("Chikorita");
+        ArrayList<String> ownedCardQuantity= new ArrayList<String>();
+        ownedCardQuantity.add("3");
+        ownedCardQuantity.add("2");
+        ArrayList<String> ownedCardCost= new ArrayList<String>();
+        ownedCardCost.add("10");
+        ownedCardCost.add("20");
+        ArrayList<String> wantedCardType= new ArrayList<String>();
+        wantedCardType.add("Mew");
+        wantedCardType.add("Bidoof");
+
+        ArrayList<String> offeredCardType = new ArrayList<String>();
+        offeredCardType.add("Pikachu");
+        offeredCardType.add("Chikorita");
+        ArrayList<String> offeredCardQuantity= new ArrayList<String>();
+        offeredCardQuantity.add("3");
+        offeredCardQuantity.add("3");
+        ArrayList<String> offeredCardCost= new ArrayList<String>();
+        offeredCardCost.add("10");
+        offeredCardCost.add("10");
+        ArrayList<String> wishedCardType= new ArrayList<String>();
+        wishedCardType.add("Mew");
+        wishedCardType.add("Bidoof");
+        wishedCardType.add("Torterra");
+
+        m.setAgentsDirectory(agentsDirectory);
+        m.setDeadAgents(deadAgents);
+        m.setBodyInfo("Mensaje de texto");
+        m.setOwnedCardType(ownedCardType);
+        m.setOwnedCardQuantity(ownedCardQuantity);
+        m.setOwnedCardCost(ownedCardCost);
+        m.setWantedCardType(wantedCardType);
+        m.setOwnedMoney("200");
+        m.setCreatedChilds("20");
+        m.setDeathTime("-");
+        m.setPastTradeGivenCard("-");
+        m.setPastTradeWantedCard("-");
+        m.setTradeWantedCard("X");
+        m.setTradeGivenCard("Y");
+        m.setOfferedCardType(offeredCardType);
+        m.setOfferedCardQuantity(offeredCardQuantity);
+        m.setOfferedCardCost(offeredCardCost);
+        m.setWishedCardType(wishedCardType);
+        m.setTradeMoney("20");
+
+        m.crearXML();*/
         //m.prueba();
 
         //Codigo ejecución agente

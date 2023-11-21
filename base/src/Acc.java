@@ -244,7 +244,7 @@ public class Acc {
         this.Rango_IPs = 0;
         this.Puerto_Inicio = 50000;
         this.Rango_Puertos = 10000;
-        this.localizacion_codigo = "C:/Users/marti/IdeaProjects/SMA_23-24/base/out/production/base"; //cambia segun quien lo ejecute
+        this.localizacion_codigo = "C:/Users/pablo/IdeaProjects/SMA_23-24/base/out/production/base"; //cambia segun quien lo ejecute
         this.tiempo_espera_fin_env = 1000 * 1; // Es el tiempo (milisegundos) que esperaremos para enviar los mensajen pendientes en la cola de envios, antes de finalizar el agente
 
         // //////////////////////////////////////
@@ -403,7 +403,7 @@ public class Acc {
 
         //TODO: mensaje nacer revisar
         Mensaje mensaje_he_nacido = new Mensaje("1",
-                ID_mensaje, "Nacimiento", "Envio información al monitor", "UDP",
+                "1", "1", "0", "UDP",
                 ID_propio, Ip_Propia, Integer.toString(Puerto_Propio_TCP+1), Puerto_Propio_str, momento_actual,
                 "ID_Monitor", Ip_Monitor, Puerto_Monitor_UDP_str, Integer.toString(Puerto_Monitor_TCP), momento_actual);
         mensaje_he_nacido.setBodyInfo(cuerpo_mens);
@@ -454,8 +454,8 @@ public class Acc {
                 " - con T vivido : " + tiempo_vivido;
 
         //TODO: mensaje muerte revisar
-        Mensaje mensaje_fin_agente = new Mensaje("1",
-                ID_mensaje, "Destrucción", "Envio información al monitor", "TCP",
+        Mensaje mensaje_fin_agente = new Mensaje("2",
+                "2", "2", "0", "UDP",
                 ID_propio, Ip_Propia, Integer.toString(Puerto_Propio_TCP+1), Puerto_Propio_str, momento_actual_str,
                 "ID_Monitor", Ip_Monitor, Integer.toString(Puerto_Monitor_TCP+1), Integer.toString(Puerto_Monitor_TCP), momento_actual_str);
         mensaje_fin_agente.setBodyInfo(cuerpo_mens_fin_agente);
@@ -558,12 +558,14 @@ public class Acc {
      */
     // synchronized
     protected void pon_en_lita_enviar(Mensaje este_mensaje) {contenedor_de_mensajes_a_enviar.add(este_mensaje); num_tot_men_env++; }
-    protected void pon_en_lita_recibidos(Mensaje este_mensaje) {contenedor_de_mensajes_recibidos.add(este_mensaje); num_tot_men_rec++; }
+    protected void pon_en_lita_recibidos(Mensaje este_mensaje) {contenedor_de_mensajes_recibidos.add(este_mensaje);
+        System.out.println("2");
+        System.out.println(contenedor_de_mensajes_recibidos.size()); num_tot_men_rec++; }
     protected void pon_en_directorio_de_agentes(AccLocalizado este_accLocalizado) {directorio_de_agentes.add(este_accLocalizado); num_tot_acc_loc++; }
 
-    protected int num_elem_lita_enviar() {int num_elem = contenedor_de_mensajes_a_enviar.size(); return num_elem;}
-    protected int num_elem_lita_recibidos() {int num_elem = contenedor_de_mensajes_recibidos.size(); return num_elem;}
-    protected int num_elem_directorio_de_agentes() {int num_elem = directorio_de_agentes.size(); return num_elem;}
+    protected int num_elem_lita_enviar() {int num_elem1 = contenedor_de_mensajes_a_enviar.size(); return num_elem1;}
+    protected int num_elem_lita_recibidos() {int num_elem2 = contenedor_de_mensajes_recibidos.size(); return num_elem2;}
+    protected int num_elem_directorio_de_agentes() {int num_elem3 = directorio_de_agentes.size(); return num_elem3;}
 
     protected int dime_num_tot_men_env() {return num_tot_men_env;}
     protected int dime_num_tot_men_rec() {return num_tot_men_rec;}

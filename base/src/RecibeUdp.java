@@ -115,6 +115,7 @@ public class RecibeUdp extends Thread {
 
 
                 // Llevamos el mensaje al contenedor de recibidos
+                System.out.println("1");
                 agente.pon_en_lita_recibidos(mensaje_recibido_UDP);
                     System.out.println("\n ==> Desde RecibeUdp, hemos recibido el mensage : " + mensaje_recibido_UDP.bodyInfo+
                             " - en contenedor tenemos : "+String.valueOf(agente.num_elem_lita_recibidos())+
