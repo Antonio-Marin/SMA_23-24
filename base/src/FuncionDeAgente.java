@@ -12,7 +12,9 @@ import java.util.Random;
  *          - Gestiona el tiempo de vida del agente eliminandolo cuando su tiempo de vida ha terminado
  *          - Genera la descendencia del agente
  *          - Busca otros agentes y los va colocando en la lista "directorio_de_agentes" de la clase Acc
+ *
  */
+
 public class FuncionDeAgente implements Runnable {
 
     // Para pruebas
@@ -25,6 +27,11 @@ public class FuncionDeAgente implements Runnable {
 
 
     protected Acc agente; // Para poder acceder a los datos generales de este agente
+
+    int cromosAlbum= 20;
+    int cromosIniciales = 30;
+    int[] listaCromos = new int[cromosAlbum];
+    int[] listaDeseado = new int[cromosAlbum];
 
     /**
      * public Acc : Contructor de la calse FuncionDeAgente
@@ -178,5 +185,58 @@ public class FuncionDeAgente implements Runnable {
                                     " - ordinal = "+num_men_enviados_fa+
                                     " - en T = "+momento_actual);
     } // Fin de - void enviaMensaje(Mensaje nuevo_mensaje) {
+
+    /**
+     * Método crearAlbum()
+     * @author:  Luis Paños Cuenca
+     * @fechaCreación 23/11/2023
+     * @return void
+     *
+     */
+    public void crearAlbum(){
+        for(int i=0; i<cromosIniciales;i++){
+            int cromo = (int)(Math.random()*20);
+            listaCromos[cromo] ++;
+        }
+        System.out.println("\nAlbum del agente "+agente.ID_propio);
+        for(int i=0;i<cromosAlbum;i++){
+            System.out.println("Nº "+ i+ ", cromos totales: "+listaCromos[i]);
+        }
+    }
+    /**
+     *
+     *  Método crearAlbumNecesitados()
+     *  @author: Luis Paños Cuenca
+     *  @fechaCreación 23/11/2023
+     **/
+    public void crearAlbumNecesitados() {
+        for (int i=0;i<cromosAlbum;i++) {
+            if(listaCromos[i] == 0){
+                System.out.println("Se necesita el cromo: "+i);
+                listaDeseado[i]++;
+            }
+        }
+    }
+
+    public void notificarCromosNecesitados(){
+        String ID_mensaje = agente.dame_codigo_id_local_men();
+        String momento_actual = String.valueOf(System.currentTimeMillis());
+        String Puerto_Propio_str = String.valueOf(agente.Puerto_Propio);
+        String Puerto_Monitor_UDP_str = String.valueOf(agente.Puerto_Monitor_UDP);
+        String cuerpo_mens = "Esto es el MENSAJE HE NACIDO  - que el agente con ID_propio : " + agente.ID_propio +
+                " - con ip : " + agente.Ip_Propia +
+                " - con Puerto_Propio : " + Puerto_Propio_str +
+                " - con ID_mensaje : " + ID_mensaje +
+                " - envia al monitor con Ip_Monitor : "+agente.Ip_Monitor+
+                " - con Puerto_Monitor : "+Puerto_Monitor_UDP_str+
+                " :  - en T : " + momento_actual;
+        for(AccLocalizado Acc : contenedor_directorio_ACCs){
+            //Falta implementacion del body
+            //HashMap<String, String> body = null;
+            Mensaje intercambio = new Mensaje(ID_mensaje,agente.Ip_Propia, agente.Puerto_Propio,agente.ID_propio, agente.Ip_Monitor, agente.Puerto_Monitor_UDP, "monitor", "UDP", cuerpo_mens);
+            agente.pon_en_lita_enviar(intercambio);
+            System.out.println("Se ha notificado de los cromos necesitados");
+        }
+    }
 
 } // FIn de - public class FuncionDeAgente implements Runnable {
