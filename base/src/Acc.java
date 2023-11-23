@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.Random;
 
 /**
- * Esta clase genera el agente, inicializa sus valores y arranca los procesos necesarios para su funcionamient
+ * Esta clase genera el agente, inicializa sus valores y arranca los procesos necesarios para su funcionamiento
  * @author MAFG y Varios alumnos 2022-2023
  * @author MAFG y Varios alumnos 2023-2024
  * @fechaDeCreacion: 2022-xx-xx
@@ -407,6 +407,31 @@ public class Acc {
                 ID_propio, Ip_Propia, Integer.toString(Puerto_Propio_TCP+1), Puerto_Propio_str, momento_actual,
                 "ID_Monitor", Ip_Monitor, Puerto_Monitor_UDP_str, Integer.toString(Puerto_Monitor_TCP), momento_actual);
         mensaje_he_nacido.setBodyInfo(cuerpo_mens);
+        mensaje_he_nacido.setDeathReason("0");
+        ArrayList<String> e = new ArrayList();
+        e.add("0");
+        mensaje_he_nacido.setOwnedCardCost(e);
+        mensaje_he_nacido.setOwnedCardQuantity(e);
+        mensaje_he_nacido.setOwnedCardType(e);
+        mensaje_he_nacido.setWantedCardType(e);
+        mensaje_he_nacido.setOwnedMoney("0");
+        mensaje_he_nacido.setCreatedChilds(String.valueOf(this.Num_hijos_generados));
+        mensaje_he_nacido.setDeathTime("0");
+        mensaje_he_nacido.setPastTradeWantedCard("-");
+        mensaje_he_nacido.setPastTradeGivenCard("-");
+        mensaje_he_nacido.setTradeWantedCard("-");
+        mensaje_he_nacido.setTradeGivenCard("-");
+        mensaje_he_nacido.setOfferedCardType(e);
+        mensaje_he_nacido.setOfferedCardCost(e);
+        mensaje_he_nacido.setOfferedCardQuantity(e);
+        mensaje_he_nacido.setWishedCardType(e);
+        mensaje_he_nacido.setTradeMoney("0");
+        ArrayList<AccTest> h = new ArrayList<>();
+        AccLocalizado ej = new AccLocalizado("id", "ip", 10000000,15550005 );
+        directorio_de_agentes.add(ej);
+        mensaje_he_nacido.setAgentsDirectory(this.directorio_de_agentes);
+        mensaje_he_nacido.setDeadAgents(this.directorio_de_agentes);
+
 
         // Insertamos el mensaje
         pon_en_lita_enviar(mensaje_he_nacido);

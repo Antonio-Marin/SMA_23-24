@@ -9,6 +9,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * class Mensaje : Clase que almacena la información asociada a un mensaje
@@ -57,8 +58,8 @@ public class Mensaje {
     protected ArrayList<String> offeredCardQuantity;
     protected ArrayList<String> offeredCardCost;
     protected ArrayList<String> wishedCardType;
-    protected ArrayList<AccTest> agentsDirectory;
-    protected ArrayList<AccTest> deadAgents;
+    protected LinkedList<AccLocalizado> agentsDirectory;
+    protected LinkedList<AccLocalizado> deadAgents;
 
 //CONSTRUCTOR DE MENSAJE
 
@@ -213,11 +214,11 @@ public class Mensaje {
     public ArrayList<String> getWishedCardType() {
         return wishedCardType;
     }
-    public ArrayList<AccTest> getAgentsDirectory() {
+    public LinkedList<AccLocalizado> getAgentsDirectory() {
         return agentsDirectory;
     }
 
-    public ArrayList<AccTest> getDeadAgents() {
+    public LinkedList<AccLocalizado> getDeadAgents() {
         return deadAgents;
     }
 
@@ -291,11 +292,11 @@ public class Mensaje {
     public void setWishedCardType(ArrayList<String> wishedCardType) {
         this.wishedCardType = wishedCardType;
     }
-    public void setAgentsDirectory(ArrayList<AccTest> agentsDirectory) {
+    public void setAgentsDirectory(LinkedList<AccLocalizado> agentsDirectory) {
         this.agentsDirectory = agentsDirectory;
     }
 
-    public void setDeadAgents(ArrayList<AccTest> deadAgents) {
+    public void setDeadAgents(LinkedList<AccLocalizado> deadAgents) {
         this.deadAgents = deadAgents;
     }
 
@@ -304,7 +305,7 @@ public class Mensaje {
      * Método que sirve para crear XML con los
      * atributos de la clase mensaje
      */
-    public void crearXML(){
+    public void crearXML() {
         try {
             //System.out.println("Llego hasta aquí 1");
 
@@ -404,9 +405,7 @@ public class Mensaje {
             bodyElement.appendChild(deathContentElement);
 
             Element deathReasonElement = doc.createElement("death_reason");
-            if(this.deathReason != "") {
-                bodyInfoElement.appendChild(doc.createTextNode(this.deathReason));
-            } else {bodyInfoElement.appendChild(doc.createTextNode("0"));}
+            deathReasonElement.appendChild(doc.createTextNode(this.deathReason));
             deathContentElement.appendChild(deathReasonElement);
 
             // Agrega los elementos dentro de death_reason si es necesario
@@ -416,25 +415,25 @@ public class Mensaje {
 
             Element ownedCardsElement = doc.createElement("owned_cards");
             deathAgentInfoElement.appendChild(ownedCardsElement);
-            if(this.ownedCardType != null) {
-                for (int i = 1; i <= this.ownedCardType.size(); i++) {
-                    String text = "owned_card" + i;
-                    Element ownedCardElement = doc.createElement(text);
-                    ownedCardsElement.appendChild(ownedCardElement);
+            //if(this.ownedCardType != null) {
+            for (int i = 1; i <= this.ownedCardType.size(); i++) {
+                String text = "owned_card";
+                Element ownedCardElement = doc.createElement(text);
+                ownedCardsElement.appendChild(ownedCardElement);
 
-                    Element ownedCardTypeElement = doc.createElement("owned_card_type");
-                    ownedCardTypeElement.appendChild(doc.createTextNode(this.ownedCardType.get(i - 1)));
-                    ownedCardElement.appendChild(ownedCardTypeElement);
+                Element ownedCardTypeElement = doc.createElement("owned_card_type");
+                ownedCardTypeElement.appendChild(doc.createTextNode(this.ownedCardType.get(i - 1)));
+                ownedCardElement.appendChild(ownedCardTypeElement);
 
-                    Element ownedCardQuantityElement = doc.createElement("owned_card_quantity");
-                    ownedCardQuantityElement.appendChild(doc.createTextNode(this.ownedCardQuantity.get(i - 1)));
-                    ownedCardElement.appendChild(ownedCardQuantityElement);
+                Element ownedCardQuantityElement = doc.createElement("owned_card_quantity");
+                ownedCardQuantityElement.appendChild(doc.createTextNode(this.ownedCardQuantity.get(i - 1)));
+                ownedCardElement.appendChild(ownedCardQuantityElement);
 
-                    Element ownedCardCostElement = doc.createElement("owned_card_cost");
-                    ownedCardCostElement.appendChild(doc.createTextNode(this.ownedCardCost.get(i - 1)));
-                    ownedCardElement.appendChild(ownedCardCostElement);
-
-                }
+                Element ownedCardCostElement = doc.createElement("owned_card_cost");
+                ownedCardCostElement.appendChild(doc.createTextNode(this.ownedCardCost.get(i - 1)));
+                ownedCardElement.appendChild(ownedCardCostElement);
+            }
+          /*      }
             }else{
                     String text = "owned_card";
                     Element ownedCardElement = doc.createElement(text);
@@ -450,12 +449,12 @@ public class Mensaje {
                     ownedCardElement.appendChild(ownedCardCostElement);
 
 
-                }
-            Element wantedCardsElement = doc.createElement("wanted_cards");
-            deathAgentInfoElement.appendChild(wantedCardsElement);
-            if(this.wantedCardType != null) {
+                }*/
+                Element wantedCardsElement = doc.createElement("wanted_cards");
+                deathAgentInfoElement.appendChild(wantedCardsElement);
+                //if(this.wantedCardType != null) {
                 for (int i = 1; i <= this.wantedCardType.size(); i++) {
-                    String text2 = "wanted_card" + i;
+                    String text2 = "wanted_card";
                     Element wantedCardElement = doc.createElement(text2);
                     wantedCardsElement.appendChild(wantedCardElement);
 
@@ -463,144 +462,149 @@ public class Mensaje {
                     wantedCardTypeElement.appendChild(doc.createTextNode(this.wantedCardType.get(i - 1)));
                     wantedCardElement.appendChild(wantedCardTypeElement);
                 }
-            }
+                //}
 
-            Element ownedMoneyElement = doc.createElement("owned_money");
-            ownedMoneyElement.appendChild(doc.createTextNode(ownedMoney));
-            deathAgentInfoElement.appendChild(ownedMoneyElement);
+                Element ownedMoneyElement = doc.createElement("owned_money");
+                ownedMoneyElement.appendChild(doc.createTextNode(ownedMoney));
+                deathAgentInfoElement.appendChild(ownedMoneyElement);
 
-            Element createdChildsElement = doc.createElement("created_childs");
-            createdChildsElement.appendChild(doc.createTextNode(createdChilds));
-            deathAgentInfoElement.appendChild(createdChildsElement);
+                Element createdChildsElement = doc.createElement("created_childs");
+                createdChildsElement.appendChild(doc.createTextNode(createdChilds));
+                deathAgentInfoElement.appendChild(createdChildsElement);
 
-            Element deathTimeElement = doc.createElement("death_time");
-            deathTimeElement.appendChild(doc.createTextNode(deathTime));
-            deathAgentInfoElement.appendChild(deathTimeElement);
+                Element deathTimeElement = doc.createElement("death_time");
+                deathTimeElement.appendChild(doc.createTextNode(deathTime));
+                deathAgentInfoElement.appendChild(deathTimeElement);
 
-            Element tradeContentElement = doc.createElement("trade_content");
-            bodyElement.appendChild(tradeContentElement);
+                Element tradeContentElement = doc.createElement("trade_content");
+                bodyElement.appendChild(tradeContentElement);
 
-            Element pastTradeWantedCardElement = doc.createElement("past_trade_wanted_card");
-            pastTradeWantedCardElement.appendChild(doc.createTextNode(pastTradeWantedCard));
-            tradeContentElement.appendChild(pastTradeWantedCardElement);
+                Element pastTradeWantedCardElement = doc.createElement("past_trade_wanted_card");
+                pastTradeWantedCardElement.appendChild(doc.createTextNode(pastTradeWantedCard));
+                tradeContentElement.appendChild(pastTradeWantedCardElement);
 
-            Element pastTradeGivenCardElement = doc.createElement("past_trade_given_card");
-            pastTradeGivenCardElement.appendChild(doc.createTextNode(pastTradeGivenCard));
-            tradeContentElement.appendChild(pastTradeGivenCardElement);
+                Element pastTradeGivenCardElement = doc.createElement("past_trade_given_card");
+                pastTradeGivenCardElement.appendChild(doc.createTextNode(pastTradeGivenCard));
+                tradeContentElement.appendChild(pastTradeGivenCardElement);
 
-            Element tradeWantedCardElement = doc.createElement("trade_wanted_card");
-            tradeWantedCardElement.appendChild(doc.createTextNode(tradeWantedCard));
-            tradeContentElement.appendChild(tradeWantedCardElement);
+                Element tradeWantedCardElement = doc.createElement("trade_wanted_card");
+                tradeWantedCardElement.appendChild(doc.createTextNode(tradeWantedCard));
+                tradeContentElement.appendChild(tradeWantedCardElement);
 
-            Element tradeGivenCardElement = doc.createElement("trade_given_card");
-            tradeGivenCardElement.appendChild(doc.createTextNode(tradeGivenCard));
-            tradeContentElement.appendChild(tradeGivenCardElement);
+                Element tradeGivenCardElement = doc.createElement("trade_given_card");
+                tradeGivenCardElement.appendChild(doc.createTextNode(tradeGivenCard));
+                tradeContentElement.appendChild(tradeGivenCardElement);
 
-            Element offeredCardsElement = doc.createElement("offered_cards");
-            tradeContentElement.appendChild(offeredCardsElement);
-            if(this.offeredCardType!=null) {
-                for (int i = 1; i <= this.offeredCardType.size(); i++) {
-                    String text3 = "offered_card" + i;
-                    Element offeredCard1Element = doc.createElement(text3);
-                    offeredCardsElement.appendChild(offeredCard1Element);
+                Element offeredCardsElement = doc.createElement("offered_cards");
+                tradeContentElement.appendChild(offeredCardsElement);
+                if (this.offeredCardType != null) {
+                    for (int i = 1; i <= this.offeredCardType.size(); i++) {
+                        String text3 = "offered_card";
+                        Element offeredCard1Element = doc.createElement(text3);
+                        offeredCardsElement.appendChild(offeredCard1Element);
 
-                    Element offeredCard1TypeElement = doc.createElement("offered_card_type");
-                    offeredCard1TypeElement.appendChild(doc.createTextNode(this.offeredCardType.get(i - 1)));
-                    offeredCard1Element.appendChild(offeredCard1TypeElement);
+                        Element offeredCard1TypeElement = doc.createElement("offered_card_type");
+                        offeredCard1TypeElement.appendChild(doc.createTextNode(this.offeredCardType.get(i - 1)));
+                        offeredCard1Element.appendChild(offeredCard1TypeElement);
 
-                    Element offeredCard1QuantityElement = doc.createElement("offered_card_quantity");
-                    offeredCard1QuantityElement.appendChild(doc.createTextNode(this.offeredCardQuantity.get(i - 1)));
-                    offeredCard1Element.appendChild(offeredCard1QuantityElement);
+                        Element offeredCard1QuantityElement = doc.createElement("offered_card_quantity");
+                        offeredCard1QuantityElement.appendChild(doc.createTextNode(this.offeredCardQuantity.get(i - 1)));
+                        offeredCard1Element.appendChild(offeredCard1QuantityElement);
 
-                    Element offeredCard1CostElement = doc.createElement("offered_card_cost");
-                    offeredCard1CostElement.appendChild(doc.createTextNode(this.offeredCardCost.get(i - 1)));
-                    offeredCard1Element.appendChild(offeredCard1CostElement);
+                        Element offeredCard1CostElement = doc.createElement("offered_card_cost");
+                        offeredCard1CostElement.appendChild(doc.createTextNode(this.offeredCardCost.get(i - 1)));
+                        offeredCard1Element.appendChild(offeredCard1CostElement);
+                    }
                 }
-            }
 
-            Element wishedCardsElement = doc.createElement("wished_cards");
-            tradeContentElement.appendChild(wishedCardsElement);
-            if(this.wishedCardType!=null) {
-                for (int i = 1; i <= this.wishedCardType.size(); i++) {
-                    String text4 = "wished_card" + i;
-                    Element wishedCardElement = doc.createElement(text4);
-                    wishedCardsElement.appendChild(wishedCardElement);
+                Element wishedCardsElement = doc.createElement("wished_cards");
+                tradeContentElement.appendChild(wishedCardsElement);
+                if (this.wishedCardType != null) {
+                    for (int i = 1; i <= this.wishedCardType.size(); i++) {
+                        String text4 = "wished_card";
+                        Element wishedCardElement = doc.createElement(text4);
+                        wishedCardsElement.appendChild(wishedCardElement);
 
-                    Element wishedCardTypeElement = doc.createElement("wished_card_type");
-                    wishedCardTypeElement.appendChild(doc.createTextNode(this.wishedCardType.get(i - 1)));
-                    wishedCardElement.appendChild(wishedCardTypeElement);
+                        Element wishedCardTypeElement = doc.createElement("wished_card_type");
+                        wishedCardTypeElement.appendChild(doc.createTextNode(this.wishedCardType.get(i - 1)));
+                        wishedCardElement.appendChild(wishedCardTypeElement);
 
+                    }
                 }
-            }
 
-            Element tradeMoneyElement = doc.createElement("trade_money");
-            tradeMoneyElement.appendChild(doc.createTextNode(this.tradeMoney));
-            tradeContentElement.appendChild(tradeMoneyElement);
+                Element tradeMoneyElement = doc.createElement("trade_money");
+                tradeMoneyElement.appendChild(doc.createTextNode(this.tradeMoney));
+                tradeContentElement.appendChild(tradeMoneyElement);
 
-            Element commonContentElement = doc.createElement("common_content");
-            messageElement.appendChild(commonContentElement);
+                Element commonContentElement = doc.createElement("common_content");
+                messageElement.appendChild(commonContentElement);
 
-            Element agentsDirectoryElement = doc.createElement("agents_directory");
-            commonContentElement.appendChild(agentsDirectoryElement);
+                Element agentsDirectoryElement = doc.createElement("agents_directory");
+                commonContentElement.appendChild(agentsDirectoryElement);
 
-            if(this.agentsDirectory!=null) {
-                for (int i = 1; i <= this.agentsDirectory.size(); i++) {
-                    String text5 = "acc" + i;
+                if (this.agentsDirectory != null) {
+                    for (int i = 1; i <= this.agentsDirectory.size(); i++) {
+                        String text5 = "acc";
 
-                    Element accElement = doc.createElement(text5);
-                    agentsDirectoryElement.appendChild(accElement);
+                        Element accElement = doc.createElement(text5);
+                        agentsDirectoryElement.appendChild(accElement);
 
-                    Element idAccElement = doc.createElement("id");
-                    idAccElement.appendChild(doc.createTextNode(this.agentsDirectory.get(i - 1).ID_propio));
-                    accElement.appendChild(idAccElement);
+                        Element idAccElement = doc.createElement("id");
+                        idAccElement.appendChild(doc.createTextNode(this.agentsDirectory.get(i - 1).ID));
+                        accElement.appendChild(idAccElement);
 
-                    Element portAccElement = doc.createElement("port");
-                    portAccElement.appendChild(doc.createTextNode(Integer.toString(this.agentsDirectory.get(i - 1).Puerto_Propio)));
-                    accElement.appendChild(portAccElement);
+                        Element portUDPAccElement = doc.createElement("port_UDP");
+                        portUDPAccElement.appendChild(doc.createTextNode(Integer.toString(this.agentsDirectory.get(i - 1).puerto)));
+                        accElement.appendChild(portUDPAccElement);
 
-                    Element ipAccElement = doc.createElement("ip");
-                    ipAccElement.appendChild(doc.createTextNode(this.agentsDirectory.get(i - 1).Ip_Propia));
-                    accElement.appendChild(ipAccElement);
+                        Element portTCPAccElement = doc.createElement("port_TCP");
+                        portTCPAccElement.appendChild(doc.createTextNode(Integer.toString(this.agentsDirectory.get(i - 1).puerto + 1)));
+                        accElement.appendChild(portTCPAccElement);
 
+                        Element ipAccElement = doc.createElement("ip");
+                        ipAccElement.appendChild(doc.createTextNode(this.agentsDirectory.get(i - 1).IP));
+                        accElement.appendChild(ipAccElement);
+
+                    }
                 }
-            }
 
-            Element deadAgentsElement = doc.createElement("dead_agents");
-            commonContentElement.appendChild(deadAgentsElement);
-            if(this.deadAgents!=null) {
-                for (int i = 1; i <= this.deadAgents.size(); i++) {
-                    String text6 = "dead_acc" + i;
+                Element deadAgentsElement = doc.createElement("dead_agents");
+                commonContentElement.appendChild(deadAgentsElement);
+                if (this.deadAgents != null) {
+                    for (int i = 1; i <= this.deadAgents.size(); i++) {
+                        String text6 = "dead_acc";
 
-                    Element deadAccElement = doc.createElement(text6);
-                    deadAgentsElement.appendChild(deadAccElement);
+                        Element deadAccElement = doc.createElement(text6);
+                        deadAgentsElement.appendChild(deadAccElement);
 
-                    Element idAccElement = doc.createElement("id");
-                    idAccElement.appendChild(doc.createTextNode(this.deadAgents.get(i - 1).ID_propio));
-                    deadAccElement.appendChild(idAccElement);
+                        Element idAccElement = doc.createElement("id");
+                        idAccElement.appendChild(doc.createTextNode(this.deadAgents.get(i - 1).ID));
+                        deadAccElement.appendChild(idAccElement);
+                    }
                 }
-            }
 
-            // Escribir el DOM en un archivo XML
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
+                // Escribir el DOM en un archivo XML
+                TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                Transformer transformer = transformerFactory.newTransformer();
 
-            // Configuración de la salida
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
-            //System.out.println("Llego hasta aquí");
-            File file = new File("xml_"+comuncId+".xml");
-            DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(file);
+                // Configuración de la salida
+                transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+                //System.out.println("Llego hasta aquí");
+                File file = new File("xml_" + comuncId + ".xml");
+                DOMSource source = new DOMSource(doc);
+                StreamResult result = new StreamResult(file);
 
-            transformer.transform(source, result);
+                transformer.transform(source, result);
 
-            System.out.println("Archivo XML creado correctamente.");
-        } catch (ParserConfigurationException | TransformerException e) {
-            e.printStackTrace();
+                System.out.println("Archivo XML creado correctamente.");
+            } catch(ParserConfigurationException | TransformerException e){
+                e.printStackTrace();
+
         }
     }
 
-    /**
+        /**
      * PRUEBA DE CREADO XML
      * Guardado para usarlo como base
      */
@@ -608,7 +612,7 @@ public class Mensaje {
     si algún elemento lo crea asi <blablabla/> esta bien no es un error, se ve que asi es como XML
     representa elementos vacios, por eso no hace falta el <blablabla></blablabla> porque no tiene ningun valor dentro
     */
-    public void prueba(){
+    /*public void prueba(){
         try {
             String comuncId = "1";
             String msgId = "1";
@@ -951,5 +955,5 @@ public class Mensaje {
         } catch (ParserConfigurationException | TransformerException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

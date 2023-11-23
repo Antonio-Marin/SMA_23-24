@@ -75,7 +75,7 @@ public class Enviar extends Thread {
                         String archivo_xsd = "ESQUEMA_XML_PROTOCOLO_COMUNICACION.xsd";
                         if(test.validarXMLConEsquema(archivo_xml,archivo_xsd)){
                             EnviaTcp(mensajeAEnviar);
-                            System.out.println("Mensaje enviado");
+                            System.out.println("Mensaje valido. Mensaje enviado");
                         } else{
                             System.out.println("Mensaje no valido");
                         }
@@ -88,7 +88,7 @@ public class Enviar extends Thread {
                         String archivo_xsd = "ESQUEMA_XML_PROTOCOLO_COMUNICACION.xsd";
                         if(test.validarXMLConEsquema(archivo_xml,archivo_xsd)){
                             EnviaUdp(mensajeAEnviar);
-                            System.out.println("Mensaje enviado");
+                            System.out.println("Mensaje valido. Mensaje enviado");
                         } else{
                             System.out.println("Mensaje no valido");
                         }
