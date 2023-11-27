@@ -244,7 +244,12 @@ public class Acc {
         this.Rango_IPs = 0;
         this.Puerto_Inicio = 50000;
         this.Rango_Puertos = 10000;
-        this.localizacion_codigo = "C:/Users/pablo/IdeaProjects/SMA_23-24/base/out/production/base"; //cambia segun quien lo ejecute
+        this.localizacion_codigo = "C:/Users/marti/IdeaProjects/SMA_23-24/base/out/production/base"; //cambia segun quien lo ejecute
+        /*
+        Localización código:
+        Pablo: C:/Users/pablo/IdeaProjects/SMA_23-24/base/out/production/base
+        Antonio: C:/Users/marti/IdeaProjects/SMA_23-24/base/out/production/base
+         */
         this.tiempo_espera_fin_env = 1000 * 1; // Es el tiempo (milisegundos) que esperaremos para enviar los mensajen pendientes en la cola de envios, antes de finalizar el agente
 
         // //////////////////////////////////////
@@ -260,10 +265,10 @@ public class Acc {
         }
         int este_Num_generacion = Integer.parseInt(este_Num_generacion_str);
         this.Num_generacion = este_Num_generacion;
-        this.Num_max_de_generaciones = 1;
+        this.Num_max_de_generaciones = 0; //CAMBIADO a 0
         this.Num_hijos_generados = 0; // Por ahora el agente no ha generado ningún descendiente
-        this.Num_max_hijos_generados = 1; // el agente no debe superar este numero de descendientes en primera generacion (en principio arbitrario
-        this.Frecuencia_partos = 0.01;
+        this.Num_max_hijos_generados = 0; // CAMBIADO a 0 | el agente no debe superar este numero de descendientes en primera generacion (en principio arbitrario)
+        this.Frecuencia_partos = 0.00; //CAMBIADO a 0.00 | anteriormente valia 0.01
         this.Frecuencia_rastreo_puertos = 0.00001f;
 
         // //////////////////////////////////////
