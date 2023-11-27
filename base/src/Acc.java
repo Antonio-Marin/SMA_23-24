@@ -484,6 +484,30 @@ public class Acc {
                 ID_propio, Ip_Propia, Integer.toString(Puerto_Propio_TCP+1), Puerto_Propio_str, momento_actual_str,
                 "ID_Monitor", Ip_Monitor, Integer.toString(Puerto_Monitor_TCP+1), Integer.toString(Puerto_Monitor_TCP), momento_actual_str);
         mensaje_fin_agente.setBodyInfo(cuerpo_mens_fin_agente);
+        mensaje_fin_agente.setDeathReason("2");
+        ArrayList<String> e = new ArrayList();
+        e.add("0");
+        mensaje_fin_agente.setOwnedCardCost(e);
+        mensaje_fin_agente.setOwnedCardQuantity(e);
+        mensaje_fin_agente.setOwnedCardType(e);
+        mensaje_fin_agente.setWantedCardType(e);
+        mensaje_fin_agente.setOwnedMoney("0");
+        mensaje_fin_agente.setCreatedChilds(String.valueOf(this.Num_hijos_generados));
+        mensaje_fin_agente.setDeathTime(String.valueOf(this.Tiempo_de_vida));
+        mensaje_fin_agente.setPastTradeWantedCard("-");
+        mensaje_fin_agente.setPastTradeGivenCard("-");
+        mensaje_fin_agente.setTradeWantedCard("-");
+        mensaje_fin_agente.setTradeGivenCard("-");
+        mensaje_fin_agente.setOfferedCardType(e);
+        mensaje_fin_agente.setOfferedCardCost(e);
+        mensaje_fin_agente.setOfferedCardQuantity(e);
+        mensaje_fin_agente.setWishedCardType(e);
+        mensaje_fin_agente.setTradeMoney("0");
+        ArrayList<AccTest> h = new ArrayList<>();
+        //AccLocalizado ej = new AccLocalizado("id", "ip", 10000000,15550005 );
+        //directorio_de_agentes.add(ej);
+        mensaje_fin_agente.setAgentsDirectory(this.directorio_de_agentes);
+        mensaje_fin_agente.setDeadAgents(this.directorio_de_agentes);
 
         // Insertamos el mensaje
         pon_en_lita_enviar(mensaje_fin_agente);
@@ -498,9 +522,14 @@ public class Acc {
         boolean espera_fin_envios = true;
         while (espera_fin_envios)
         {
-            if ((num_elem_lita_enviar() <= 0) || ((momento_actual + tiempo_espera_fin_env) < System.currentTimeMillis())){espera_fin_envios = false;}
+            //System.out.println(num_elem_lita_enviar());
+            if ((num_elem_lita_enviar() <= 0)){espera_fin_envios = false;}
         }
-
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
         // Dejamos la casa como estaba
         cerrarSockets();
 
