@@ -113,7 +113,7 @@ public class RecibeUdp extends Thread {
                         " - protocolo : "+mensaje_recibido_UDP.comunicationProtocol+
                         "\n - mensaje : "+mensaje_recibido_UDP.bodyInfo);
 
-
+                //TODO hacer bien mensaje
                 // Llevamos el mensaje al contenedor de recibidos
                 System.out.println("1");
                 agente.pon_en_lita_recibidos(mensaje_recibido_UDP);
