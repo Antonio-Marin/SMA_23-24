@@ -7,22 +7,22 @@
         <protocol_step>0</protocol_step>
         <comunication_protocol>UDP</comunication_protocol>
         <origin>
-            <origin_id>Pablo-CAMBIACROMOS</origin_id>
+            <origin_id>Pablo-Cambiacromos</origin_id>
             <origin_ip>192.168.56.1</origin_ip>
-            <origin_port_UDP>53337</origin_port_UDP>
-            <origin_port_TCP>53336</origin_port_TCP>
-            <origin_time>1701088853500</origin_time>
+            <origin_port_UDP>51769</origin_port_UDP>
+            <origin_port_TCP>51768</origin_port_TCP>
+            <origin_time>1701172112799</origin_time>
         </origin>
         <destination>
             <destination_id>ID_Monitor</destination_id>
-            <destination_ip>192.168.156.107</destination_ip>
+            <destination_ip>192.168.214.107</destination_ip>
             <destination_port_UDP>7</destination_port_UDP>
             <destination_port_TCP>6</destination_port_TCP>
-            <destination_time>1701088853500</destination_time>
+            <destination_time>1701172112799</destination_time>
         </destination>
     </header>
     <body>
-        <body_info>Esto es el MENSAJE HE NACIDO  - que el agente con ID_propio : Pablo-CAMBIACROMOS - con ip : 192.168.56.1 - con Puerto_Propio : 53336 - con ID_mensaje : Pablo-CAMBIACROMOS_men_0 - envia al monitor con Ip_Monitor : 192.168.156.107 - con Puerto_Monitor : 7 :  - en T : 1701088853500</body_info>
+        <body_info>Esto es el MENSAJE HE NACIDO  - que el agente con ID_propio : Pablo-Cambiacromos - con ip : 192.168.56.1 - con Puerto_Propio : 51768 - con ID_mensaje : Pablo-Cambiacromos_men_0 - envia al monitor con Ip_Monitor : 192.168.214.107 - con Puerto_Monitor : 7 :  - en T : 1701172112799</body_info>
         <death_content>
             <death_reason>0</death_reason>
             <death_agent_info>
@@ -39,7 +39,7 @@
                     </wanted_card>
                 </wanted_cards>
                 <owned_money>0</owned_money>
-                <created_childs>1</created_childs>
+                <created_childs>0</created_childs>
                 <death_time>0</death_time>
             </death_agent_info>
         </death_content>
