@@ -1,3 +1,5 @@
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -27,11 +29,12 @@ public class FuncionDeAgente implements Runnable {
 
 
     protected Acc agente; // Para poder acceder a los datos generales de este agente
-
-    int cromosAlbum= 20;
-    int cromosIniciales = 30;
-    int[] listaCromos = new int[cromosAlbum];
-    int[] listaDeseado = new int[cromosAlbum];
+    ArrayList<String> cromosTotales = new ArrayList<>();
+    int cromosAlbum= 10;
+    int cromosIniciales = 20;
+    ArrayList<String> listaCromos = new ArrayList<>();
+    ArrayList<String> listaDeseado = new ArrayList<>();
+    ArrayList cantidad =new ArrayList();
 
     /**
      * public Acc : Contructor de la calse FuncionDeAgente
@@ -194,13 +197,23 @@ public class FuncionDeAgente implements Runnable {
      *
      */
     public void crearAlbum(){
+        cromosTotales.add("Chikorita");
+        cromosTotales.add("Starly");
+        cromosTotales.add("Charizard");
+        cromosTotales.add("Squirtle");
+        cromosTotales.add("Treeko");
+        cromosTotales.add("Infernape");
+        cromosTotales.add("Piplup");
+        cromosTotales.add("Torterra");
+        cromosTotales.add("Clodsire");
+        cromosTotales.add("Ghastly");
         for(int i=0; i<cromosIniciales;i++){
-            int cromo = (int)(Math.random()*20);
-            listaCromos[cromo] ++;
+            int cromo = (int)(Math.random()* cromosTotales.size());
+            listaCromos.add(cromosTotales.get(cromo));
         }
         System.out.println("\nAlbum del agente "+agente.ID_propio);
         for(int i=0;i<cromosAlbum;i++){
-            System.out.println("Nº "+ i+ ", cromos totales: "+listaCromos[i]);
+            System.out.println("Nº "+ i+ ", cromos totales: "+listaCromos.get(i));
         }
     }
     /**
@@ -210,11 +223,19 @@ public class FuncionDeAgente implements Runnable {
      *  @fechaCreación 23/11/2023
      **/
     public void crearAlbumNecesitados() {
-        for (int i=0;i<cromosAlbum;i++) {
-            if(listaCromos[i] == 0){
-                System.out.println("Se necesita el cromo: "+i);
-                listaDeseado[i]++;
+        int cont = 0;
+
+        for(int i=0; i< listaCromos.size();i++){
+            for(int j=0;j< listaCromos.size();j++){
+                if(listaCromos.get(j)==listaCromos.get(i)){
+                    cont++;
+                }
             }
+            if(cont==0){
+                System.out.println("Se necesita el cromo: " + listaCromos.get(i));
+                listaDeseado.add(listaCromos.get(i));
+            }
+            cantidad.add(cont);
         }
     }
 
@@ -223,17 +244,44 @@ public class FuncionDeAgente implements Runnable {
         String momento_actual = String.valueOf(System.currentTimeMillis());
         String Puerto_Propio_str = String.valueOf(agente.Puerto_Propio);
         String Puerto_Monitor_UDP_str = String.valueOf(agente.Puerto_Monitor_UDP);
-        String cuerpo_mens = "Esto es el MENSAJE HE NACIDO  - que el agente con ID_propio : " + agente.ID_propio +
+        String cuerpo_mens = "Esto es el MENSAJE INTERCAMBIO  - que el agente con ID_propio : " + agente.ID_propio +
                 " - con ip : " + agente.Ip_Propia +
                 " - con Puerto_Propio : " + Puerto_Propio_str +
                 " - con ID_mensaje : " + ID_mensaje +
                 " - envia al monitor con Ip_Monitor : "+agente.Ip_Monitor+
                 " - con Puerto_Monitor : "+Puerto_Monitor_UDP_str+
+                " - con los cromos que necesito:"+ listaDeseado+
+                " - tengo los siguientes cromos:"+ listaCromos+
                 " :  - en T : " + momento_actual;
         for(AccLocalizado Acc : contenedor_directorio_ACCs){
             //Falta implementacion del body
             //HashMap<String, String> body = null;
-            Mensaje intercambio = new Mensaje(ID_mensaje,agente.Ip_Propia, agente.Puerto_Propio,agente.ID_propio, agente.Ip_Monitor, agente.Puerto_Monitor_UDP, "monitor", "UDP", cuerpo_mens);
+            Mensaje intercambio = new Mensaje("3","3","3","0","UDP",agente.ID_propio, agente.Ip_Propia, Integer.toString(agente.Puerto_Propio_TCP+1),Puerto_Propio_str,momento_actual,"ID_Monitor", agente.Ip_Monitor, Puerto_Monitor_UDP_str,Integer.toString(agente.Puerto_Monitor_TCP),momento_actual);
+            intercambio.setBodyInfo(cuerpo_mens);
+            intercambio.setDeathReason("0");
+            ArrayList<String> e = new ArrayList();
+            e.add("0");
+            intercambio.setOwnedCardCost(e);
+            intercambio.setOwnedCardQuantity(cantidad);
+            intercambio.setOwnedCardType(listaCromos);
+            intercambio.setWantedCardType(listaDeseado);
+            intercambio.setOwnedMoney("0");
+            intercambio.setCreatedChilds(String.valueOf(this.Num_hijos_generados));
+            intercambio.setDeathTime("0");
+            intercambio.setPastTradeWantedCard("-");
+            intercambio.setPastTradeGivenCard("-");
+            intercambio.setTradeWantedCard("-");
+            intercambio.setTradeGivenCard("-");
+            intercambio.setOfferedCardType(e);
+            intercambio.setOfferedCardCost(e);
+            intercambio.setOfferedCardQuantity(e);
+            intercambio.setWishedCardType(listaDeseado);
+            intercambio.setTradeMoney("0");
+            ArrayList<AccTest> h = new ArrayList<>();
+            AccLocalizado ej = new AccLocalizado("id", "ip", 10000000,15550005 );
+            intercambio.add(ej);
+            intercambio.setAgentsDirectory(this.directorio_de_agentes);
+            intercambio.setDeadAgents(this.directorio_de_agentes);
             agente.pon_en_lita_enviar(intercambio);
             System.out.println("Se ha notificado de los cromos necesitados");
         }
