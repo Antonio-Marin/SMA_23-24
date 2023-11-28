@@ -2,6 +2,8 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -202,14 +204,32 @@ public class Enviar extends Thread {
 
         try {
             //Creamos el socket de UDP
+            String filePath ="C:/Users/pablo/IdeaProjects/SMA_23-24/base/" +"xml_"+mensajeAEnviar.comuncId+".xml";
+            String fileName = new File(filePath).getName();
             DatagramSocket socketUDP = new DatagramSocket();
             //Convertimos el mensaje a bytes
-            byte[] mensaje_UDP = mensajeAEnviar.bodyInfo.getBytes();
+            byte[] mensaje_UDP = fileName.getBytes();
             //Creamos un datagrama
-            DatagramPacket paquete_UDP = new DatagramPacket(mensaje_UDP, mensaje_UDP.length, InetAddress.getByName(mensajeAEnviar.destinationIp), puerto_destino_UDP);
+            DatagramPacket paquete_UDP_nombre = new DatagramPacket(mensaje_UDP, mensaje_UDP.length, InetAddress.getByName(mensajeAEnviar.destinationIp), puerto_destino_UDP);
             //Lo enviamos con send
-            socketUDP.send(paquete_UDP);
+            socketUDP.send(paquete_UDP_nombre);
+
+            FileInputStream fileInputStream = new FileInputStream(filePath);
+            byte[] buffer = new byte[1024];
+            int byteRead;
+
+            while((byteRead = fileInputStream.read(buffer)) != -1){
+                DatagramPacket dataPacket = new DatagramPacket(buffer, byteRead, InetAddress.getByName(mensajeAEnviar.destinationIp), puerto_destino_UDP);
+                socketUDP.send(dataPacket);
+            }
+
+            byte[] eofData = "EOF".getBytes();
+            DatagramPacket eofPacket = new DatagramPacket(eofData, eofData.length, InetAddress.getByName(mensajeAEnviar.destinationIp), puerto_destino_UDP);
+            socketUDP.send(eofPacket);
+
+            System.out.println("Archivo XML enviado con exito");
             //Cerramos el socket
+            fileInputStream.close();
             socketUDP.close();
 
             String num_men_por_enviar_str = String.valueOf(agente.num_elem_lita_enviar());
