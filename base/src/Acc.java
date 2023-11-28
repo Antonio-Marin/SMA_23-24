@@ -620,9 +620,7 @@ public class Acc {
      */
     // synchronized
     protected void pon_en_lita_enviar(Mensaje este_mensaje) {contenedor_de_mensajes_a_enviar.add(este_mensaje); num_tot_men_env++; }
-    protected void pon_en_lita_recibidos(Mensaje este_mensaje) {contenedor_de_mensajes_recibidos.add(este_mensaje);
-        System.out.println("2");
-        System.out.println(contenedor_de_mensajes_recibidos.size()); num_tot_men_rec++; }
+    protected void pon_en_lita_recibidos(Mensaje este_mensaje) {contenedor_de_mensajes_recibidos.add(este_mensaje);num_tot_men_rec++; }
     protected void pon_en_directorio_de_agentes(AccLocalizado este_accLocalizado) {directorio_de_agentes.add(este_accLocalizado); num_tot_acc_loc++; }
 
     protected int num_elem_lita_enviar() {int num_elem1 = contenedor_de_mensajes_a_enviar.size(); return num_elem1;}
