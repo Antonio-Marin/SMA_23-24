@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.Random;
 
 /**
- * Esta clase genera el agente, inicializa sus valores y arranca los procesos necesarios para su funcionamient
+ * Esta clase genera el agente, inicializa sus valores y arranca los procesos necesarios para su funcionamiento
  * @author MAFG y Varios alumnos 2022-2023
  * @author MAFG y Varios alumnos 2023-2024
  * @fechaDeCreacion: 2022-xx-xx
@@ -31,7 +31,6 @@ public class Acc {
     // Datos del agente
     protected String ID_propio; // Identificador unico de este agente
     protected String Ip_Propia;  // Ip donde reside este agente
-    protected int Puerto_Propio;  // Es el puerto asociado al agente (coincide con el puerto de servidor TCP del agente)
     protected int Puerto_Propio_TCP;  // Es el puerto de servidor TCP del agente (coincide con el puerto asociado al agente)
     protected int Puerto_Propio_UDP;  // Es el puerto de servidor UDP del agente (es el siguiente a "Puerto_Propio" osea - Puerto_Propio_UDP = Puerto_Propio+1)
     protected long Tiempo_de_nacimiento;  // La hora del sistema de esta maquina en la que se genera el agente
@@ -151,16 +150,15 @@ public class Acc {
         }
         else if (this.tipo_agente == tipos_de_agentes.MONITOR) {
             // Para el agente MONITOR los puertos vienen fijados al generar el agente
-            this.Puerto_Propio = this.Puerto_Monitor;
-            this.Puerto_Propio_TCP = this.Puerto_Propio;
-            this.Puerto_Propio_UDP = this.Puerto_Propio + 1;
+            this.Puerto_Propio_TCP = this.Puerto_Monitor;
+            this.Puerto_Propio_UDP = this.Puerto_Propio_TCP + 1;
 
             // Generamos los sockets de TCP y UDP en el monitor, ya que este sabe cuales son sus puerton y no usa "buscaNido()" para localizarse
             try {
                 servidor_TCP = new ServerSocket(Puerto_Propio_TCP);
                 servidor_UDP = new DatagramSocket(Puerto_Propio_UDP);
             } catch (Exception e) {
-                System.out.println("\n ==> ERROR. Desde Acc al abrir los puertos de comunicaciones con Puerto_Propio : " + Puerto_Propio +
+                System.out.println("\n ==> ERROR. Desde Acc al abrir los puertos de comunicaciones con Puerto_Propio : " + Puerto_Propio_TCP +
                         " - con Puerto_Propio_TCP : " + Puerto_Propio_TCP +
                         " - con Puerto_Propio_UDP : " + Puerto_Propio_UDP +
                         " - en el MONITOR");
@@ -246,7 +244,12 @@ public class Acc {
         this.Rango_IPs = 0;
         this.Puerto_Inicio = 50000;
         this.Rango_Puertos = 10000;
-        this.localizacion_codigo = "D:/Datos/miki/Docencia/PracticasSMA/Codigo/cambiaCromos/2023_2024/out/production/2023-2024/";
+        this.localizacion_codigo = "C:/Users/marti/IdeaProjects/SMA_23-24/base/out/production/base"; //cambia segun quien lo ejecute
+        /*
+        Localización código:
+        Pablo: C:/Users/pablo/IdeaProjects/SMA_23-24/base/out/production/base
+        Antonio: C:/Users/marti/IdeaProjects/SMA_23-24/base/out/production/base
+         */
         this.tiempo_espera_fin_env = 1000 * 1; // Es el tiempo (milisegundos) que esperaremos para enviar los mensajen pendientes en la cola de envios, antes de finalizar el agente
 
         // //////////////////////////////////////
@@ -262,10 +265,10 @@ public class Acc {
         }
         int este_Num_generacion = Integer.parseInt(este_Num_generacion_str);
         this.Num_generacion = este_Num_generacion;
-        this.Num_max_de_generaciones = 1;
+        this.Num_max_de_generaciones = 0; //CAMBIADO a 0
         this.Num_hijos_generados = 0; // Por ahora el agente no ha generado ningún descendiente
-        this.Num_max_hijos_generados = 1; // el agente no debe superar este numero de descendientes en primera generacion (en principio arbitrario
-        this.Frecuencia_partos = 0.01;
+        this.Num_max_hijos_generados = 0; // CAMBIADO a 0 | el agente no debe superar este numero de descendientes en primera generacion (en principio arbitrario)
+        this.Frecuencia_partos = 0.00; //CAMBIADO a 0.00 | anteriormente valia 0.01
         this.Frecuencia_rastreo_puertos = 0.00001f;
 
         // //////////////////////////////////////
@@ -313,9 +316,8 @@ public class Acc {
                 servidor_UDP = new DatagramSocket(puerto_busqueda + 1);
 
                 // Si hemos podido ocupar los dos puertos, ya son nuestros y por tanto anotamos nuestra localizacion
-                this.Puerto_Propio = puerto_busqueda;
-                this.Puerto_Propio_TCP = Puerto_Propio;
-                this.Puerto_Propio_UDP = Puerto_Propio +1;
+                this.Puerto_Propio_TCP = puerto_busqueda;
+                this.Puerto_Propio_UDP = Puerto_Propio_TCP +1;
 
                 // Si los dos puertos han funcionado, ya tenemos nido y podemos para de buscar
                 sigue_buscando = false;
@@ -328,7 +330,7 @@ public class Acc {
                         " - con T_actual : "+ T_actual +
                         " - con T_limite_busqueda : "+ T_limite_busqueda +
                         " - tiempo invertido (milisegundos) : "+ T_buscando+
-                        "\n - anidado en Puerto_Propio : "+ this.Puerto_Propio +
+                        "\n - anidado en Puerto_Propio : "+ this.Puerto_Propio_TCP +
                         " - Puerto_Propio_TCP : " + this.Puerto_Propio_TCP +
                         " - Puerto_Propio_UDP : " + this.Puerto_Propio_UDP);
 
@@ -394,7 +396,7 @@ public class Acc {
 
         String ID_mensaje = dame_codigo_id_local_men();
         String momento_actual = String.valueOf(System.currentTimeMillis());
-        String Puerto_Propio_str = String.valueOf(Puerto_Propio);
+        String Puerto_Propio_str = String.valueOf(Puerto_Propio_TCP);
         String Puerto_Monitor_UDP_str = String.valueOf(Puerto_Monitor_UDP);
         String cuerpo_mens = "Esto es el MENSAJE HE NACIDO  - que el agente con ID_propio : " + ID_propio +
                 " - con ip : " + Ip_Propia +
@@ -404,15 +406,37 @@ public class Acc {
                 " - con Puerto_Monitor : "+Puerto_Monitor_UDP_str+
                 " :  - en T : " + momento_actual;
 
-        Mensaje mensaje_he_nacido = new Mensaje(ID_mensaje,
-                Ip_Propia,
-                Puerto_Propio,
-                ID_propio,
-                Ip_Monitor,
-                Puerto_Monitor_UDP,
-                "monitor",
-                "UDP",
-                cuerpo_mens);
+        //TODO: mensaje nacer revisar
+        Mensaje mensaje_he_nacido = new Mensaje("1",
+                "1", "1", "0", "UDP",
+                ID_propio, Ip_Propia, Integer.toString(Puerto_Propio_TCP+1), Puerto_Propio_str, momento_actual,
+                "ID_Monitor", Ip_Monitor, Puerto_Monitor_UDP_str, Integer.toString(Puerto_Monitor_TCP), momento_actual);
+        mensaje_he_nacido.setBodyInfo(cuerpo_mens);
+        mensaje_he_nacido.setDeathReason("0");
+        ArrayList<String> e = new ArrayList();
+        e.add("0");
+        mensaje_he_nacido.setOwnedCardCost(e);
+        mensaje_he_nacido.setOwnedCardQuantity(e);
+        mensaje_he_nacido.setOwnedCardType(e);
+        mensaje_he_nacido.setWantedCardType(e);
+        mensaje_he_nacido.setOwnedMoney("0");
+        mensaje_he_nacido.setCreatedChilds(String.valueOf(this.Num_hijos_generados));
+        mensaje_he_nacido.setDeathTime("0");
+        mensaje_he_nacido.setPastTradeWantedCard("-");
+        mensaje_he_nacido.setPastTradeGivenCard("-");
+        mensaje_he_nacido.setTradeWantedCard("-");
+        mensaje_he_nacido.setTradeGivenCard("-");
+        mensaje_he_nacido.setOfferedCardType(e);
+        mensaje_he_nacido.setOfferedCardCost(e);
+        mensaje_he_nacido.setOfferedCardQuantity(e);
+        mensaje_he_nacido.setWishedCardType(e);
+        mensaje_he_nacido.setTradeMoney("0");
+        ArrayList<AccTest> h = new ArrayList<>();
+        AccLocalizado ej = new AccLocalizado("id", "ip", 10000000,15550005 );
+        directorio_de_agentes.add(ej);
+        mensaje_he_nacido.setAgentsDirectory(this.directorio_de_agentes);
+        mensaje_he_nacido.setDeadAgents(this.directorio_de_agentes);
+
 
         // Insertamos el mensaje
         pon_en_lita_enviar(mensaje_he_nacido);
@@ -421,7 +445,7 @@ public class Acc {
         String Tiempo_de_nacimiento_str = String.valueOf(this.Tiempo_de_nacimiento);
         System.out.println("\n ==> Ha nacido un agente en la IP = "+Ip_Propia+
                                 " - con ID_propio :" + this.ID_propio +
-                                " - en el puerto :" + this.Puerto_Propio +
+                                " - en el puerto :" + this.Puerto_Propio_TCP +
                                 " - Su generación es :" + Num_generacion_str +
                                 " - t de generación :" + Tiempo_de_nacimiento_str);
     } // Fin de - protected void notificaNacimiento() {
@@ -440,39 +464,63 @@ public class Acc {
     protected void finalizaAgente() {
         Estado_Actual = Estado_del_ACC.FINALIZADO;
 
-        // ///////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////
         // Notificamos al monitor que este agente ha finalizadO
+        if (tipo_agente == tipos_de_agentes.CAMBIACROMOS) {
+            String ID_mensaje = dame_codigo_id_local_men();
+            long momento_actual = System.currentTimeMillis();
+            String momento_actual_str = String.valueOf(System.currentTimeMillis());
+            String tiempo_vivido = String.valueOf(System.currentTimeMillis() - Tiempo_de_nacimiento);
+            String Puerto_Propio_str = String.valueOf(Puerto_Propio_TCP);
+            String Puerto_Monitor_TCP_str = String.valueOf(Puerto_Monitor_TCP);
+            String cuerpo_mens_fin_agente = "Esto es el MENSAJE FIN DE AGENTE  - que el agente con ID_propio : " + ID_propio +
+                    " - con ip : " + Ip_Propia +
+                    " - con Puerto_Propio : " + Puerto_Propio_str +
+                    " - con ID_mensaje : " + ID_mensaje +
+                    " - envia al monitor con Ip_Monitor : " + Ip_Monitor +
+                    " - con Puerto_Monitor : " + Puerto_Monitor_TCP_str +
+                    " - en T : " + momento_actual_str +
+                    " - con T de vida : " + Tiempo_de_vida +
+                    " - con T vivido : " + tiempo_vivido;
 
-        String ID_mensaje = dame_codigo_id_local_men();
-        long momento_actual = System.currentTimeMillis();
-        String momento_actual_str = String.valueOf(System.currentTimeMillis());
-        String tiempo_vivido =  String.valueOf(System.currentTimeMillis() - Tiempo_de_nacimiento);
-        String Puerto_Propio_str = String.valueOf(Puerto_Propio);
-        String Puerto_Monitor_TCP_str = String.valueOf(Puerto_Monitor_TCP);
-        String cuerpo_mens_fin_agente = "Esto es el MENSAJE FIN DE AGENTE  - que el agente con ID_propio : " + ID_propio +
-                " - con ip : " + Ip_Propia +
-                " - con Puerto_Propio : " + Puerto_Propio_str +
-                " - con ID_mensaje : " + ID_mensaje +
-                " - envia al monitor con Ip_Monitor : "+Ip_Monitor+
-                " - con Puerto_Monitor : "+Puerto_Monitor_TCP_str+
-                " - en T : " + momento_actual_str+
-                " - con T de vida : " + Tiempo_de_vida +
-                " - con T vivido : " + tiempo_vivido;
+            //TODO: mensaje muerte revisar
+            Mensaje mensaje_fin_agente = new Mensaje("2",
+                    "2", "2", "0", "UDP",
+                    ID_propio, Ip_Propia, Integer.toString(Puerto_Propio_TCP + 1), Puerto_Propio_str, momento_actual_str,
+                    "ID_Monitor", Ip_Monitor, Integer.toString(Puerto_Monitor_TCP + 1), Integer.toString(Puerto_Monitor_TCP), momento_actual_str);
+            mensaje_fin_agente.setBodyInfo(cuerpo_mens_fin_agente);
+            mensaje_fin_agente.setDeathReason("2");
+            ArrayList<String> e = new ArrayList();
+            e.add("0");
+            mensaje_fin_agente.setOwnedCardCost(e);
+            mensaje_fin_agente.setOwnedCardQuantity(e);
+            mensaje_fin_agente.setOwnedCardType(e);
+            mensaje_fin_agente.setWantedCardType(e);
+            mensaje_fin_agente.setOwnedMoney("0");
+            mensaje_fin_agente.setCreatedChilds(String.valueOf(this.Num_hijos_generados));
+            mensaje_fin_agente.setDeathTime(String.valueOf(this.Tiempo_de_vida));
+            mensaje_fin_agente.setPastTradeWantedCard("-");
+            mensaje_fin_agente.setPastTradeGivenCard("-");
+            mensaje_fin_agente.setTradeWantedCard("-");
+            mensaje_fin_agente.setTradeGivenCard("-");
+            mensaje_fin_agente.setOfferedCardType(e);
+            mensaje_fin_agente.setOfferedCardCost(e);
+            mensaje_fin_agente.setOfferedCardQuantity(e);
+            mensaje_fin_agente.setWishedCardType(e);
+            mensaje_fin_agente.setTradeMoney("0");
+            ArrayList<AccTest> h = new ArrayList<>();
+            //AccLocalizado ej = new AccLocalizado("id", "ip", 10000000,15550005 );
+            //directorio_de_agentes.add(ej);
+            mensaje_fin_agente.setAgentsDirectory(this.directorio_de_agentes);
+            mensaje_fin_agente.setDeadAgents(this.directorio_de_agentes);
 
-        Mensaje mensaje_fin_agente = new Mensaje(ID_mensaje,
-                Ip_Propia,
-                Puerto_Propio,
-                ID_propio,
-                Ip_Monitor,
-                Puerto_Monitor_TCP,
-                "monitor",
-                "TCP",
-                cuerpo_mens_fin_agente);
+            // Insertamos el mensaje
+            pon_en_lita_enviar(mensaje_fin_agente);
 
-        // Insertamos el mensaje
-        pon_en_lita_enviar(mensaje_fin_agente);
-
-        System.out.println("\n ==> NOTIFICACION LOCAL de FIN DE AGENTE - \n "+ cuerpo_mens_fin_agente);
+            System.out.println("\n ==> NOTIFICACION LOCAL de FIN DE AGENTE - \n " + cuerpo_mens_fin_agente);
+        }else{
+            System.out.println("\n ==> NOTIFICACION LOCAL de FIN DE AGENTE: "+ID_propio);
+        }
 
         // ///////////////////////////////////////////////////////
         // Nos vamos
@@ -482,9 +530,14 @@ public class Acc {
         boolean espera_fin_envios = true;
         while (espera_fin_envios)
         {
-            if ((num_elem_lita_enviar() <= 0) || ((momento_actual + tiempo_espera_fin_env) < System.currentTimeMillis())){espera_fin_envios = false;}
+            //System.out.println(num_elem_lita_enviar());
+            if ((num_elem_lita_enviar() <= 0)){espera_fin_envios = false;}
         }
-
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
         // Dejamos la casa como estaba
         cerrarSockets();
 
@@ -567,12 +620,12 @@ public class Acc {
      */
     // synchronized
     protected void pon_en_lita_enviar(Mensaje este_mensaje) {contenedor_de_mensajes_a_enviar.add(este_mensaje); num_tot_men_env++; }
-    protected void pon_en_lita_recibidos(Mensaje este_mensaje) {contenedor_de_mensajes_recibidos.add(este_mensaje); num_tot_men_rec++; }
+    protected void pon_en_lita_recibidos(Mensaje este_mensaje) {contenedor_de_mensajes_recibidos.add(este_mensaje);num_tot_men_rec++; }
     protected void pon_en_directorio_de_agentes(AccLocalizado este_accLocalizado) {directorio_de_agentes.add(este_accLocalizado); num_tot_acc_loc++; }
 
-    protected int num_elem_lita_enviar() {int num_elem = contenedor_de_mensajes_a_enviar.size(); return num_elem;}
-    protected int num_elem_lita_recibidos() {int num_elem = contenedor_de_mensajes_recibidos.size(); return num_elem;}
-    protected int num_elem_directorio_de_agentes() {int num_elem = directorio_de_agentes.size(); return num_elem;}
+    protected int num_elem_lita_enviar() {int num_elem1 = contenedor_de_mensajes_a_enviar.size(); return num_elem1;}
+    protected int num_elem_lita_recibidos() {int num_elem2 = contenedor_de_mensajes_recibidos.size(); return num_elem2;}
+    protected int num_elem_directorio_de_agentes() {int num_elem3 = directorio_de_agentes.size(); return num_elem3;}
 
     protected int dime_num_tot_men_env() {return num_tot_men_env;}
     protected int dime_num_tot_men_rec() {return num_tot_men_rec;}
