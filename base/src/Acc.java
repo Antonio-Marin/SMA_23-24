@@ -184,6 +184,7 @@ public class Acc {
                 // Para el agente CAMBIACROMOS arrancamos su funcion del agente y notificamos al monitor su nacimiento
             this.funcionAgente = new FuncionDeAgente(this);
             notificaNacimiento();
+            notificarCromosNecesitados();
         }
         else if (this.tipo_agente == tipos_de_agentes.MONITOR)
         {
@@ -425,6 +426,60 @@ public class Acc {
                                 " - Su generación es :" + Num_generacion_str +
                                 " - t de generación :" + Tiempo_de_nacimiento_str);
     } // Fin de - protected void notificaNacimiento() {
+
+
+    public void notificarCromosNecesitados(){
+
+        System.out.println();
+
+        System.out.println("===> Este es el mensaje para notificar los cromos ofertados y los deseados");
+
+        String ID_mensaje = this.dame_codigo_id_local_men();
+        String momento_actual = String.valueOf(System.currentTimeMillis());
+        String Puerto_Propio_str = String.valueOf(this.Puerto_Propio);
+        String Puerto_Monitor_UDP_str = String.valueOf(this.Puerto_Monitor_UDP);
+        String cuerpo_mens = "Esto es el MENSAJE INTERCAMBIO  - que el agente con ID_propio : " + this.ID_propio +
+                " - con ip : " + this.Ip_Propia +
+                " - con Puerto_Propio : " + Puerto_Propio_str +
+                " - con ID_mensaje : " + ID_mensaje +
+                " - envia al monitor con Ip_Monitor : "+ this.Ip_Monitor+
+                " - con Puerto_Monitor : "+Puerto_Monitor_UDP_str+
+                " - con los cromos que necesito:"+ listaDeseado+
+                " - tengo los siguientes cromos:"+ listaCromos+
+                " :  - en T : " + momento_actual;
+        for(AccLocalizado Acc : agente.directorio_de_agentes){
+            //Falta implementacion del body
+            //HashMap<String, String> body = null;
+            Mensaje intercambio = new Mensaje("3","3","3","0","UDP",agente.ID_propio, agente.Ip_Propia, Integer.toString(agente.Puerto_Propio_TCP+1),Puerto_Propio_str,momento_actual,"ID_Monitor", agente.Ip_Monitor, Puerto_Monitor_UDP_str,Integer.toString(agente.Puerto_Monitor_TCP),momento_actual);
+            intercambio.setBodyInfo(cuerpo_mens);
+            intercambio.setDeathReason("0");
+            ArrayList<String> e = new ArrayList();
+            e.add("0");
+            intercambio.setOwnedCardCost(e);
+            intercambio.setOwnedCardQuantity(cantidad);
+            intercambio.setOwnedCardType(listaCromos);
+            intercambio.setWantedCardType(listaDeseado);
+            intercambio.setOwnedMoney("0");
+            intercambio.setCreatedChilds(String.valueOf(agente.Num_hijos_generados));
+            intercambio.setDeathTime("0");
+            intercambio.setPastTradeWantedCard("-");
+            intercambio.setPastTradeGivenCard("-");
+            intercambio.setTradeWantedCard("-");
+            intercambio.setTradeGivenCard("-");
+            intercambio.setOfferedCardType(e);
+            intercambio.setOfferedCardCost(e);
+            intercambio.setOfferedCardQuantity(e);
+            intercambio.setWishedCardType(listaDeseado);
+            intercambio.setTradeMoney("0");
+            ArrayList<AccLocalizado> h = new ArrayList<>();
+            AccLocalizado ej = new AccLocalizado("id", "ip", 10000000,15550005 );
+            h.add(ej);
+            intercambio.setAgentsDirectory(agente.directorio_de_agentes);
+            intercambio.setDeadAgents(agente.directorio_de_agentes);
+            agente.pon_en_lita_enviar(intercambio);
+            System.out.println("Se ha notificado de los cromos necesitados");
+        }
+    }
 
     /**
      *  notificaFin() : Notifica al monitor que este agente ha finalizado e informa del resultado de la realizacion del proceso
