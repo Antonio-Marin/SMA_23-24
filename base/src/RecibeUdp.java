@@ -115,7 +115,7 @@ public class RecibeUdp extends Thread {
                     String protocolo = "UDP";
                     String cuerpo_mens = paquete_recibido;
                     String momento_actual = String.valueOf(System.currentTimeMillis());
-                    System.out.println("Veamos que pone: "+ cuerpo_mens);
+                    //System.out.println("Veamos que pone: "+ cuerpo_mens);
 
                     Mensaje mensaje_recibido_UDP = new Mensaje("1",
                             "El ID_mensaje viene en el cuerpo del mensaje", "mensaje_recibido_UDP", "Envio informacón", protocolo,
@@ -128,14 +128,15 @@ public class RecibeUdp extends Thread {
                     System.out.println("\n ==> Mensaje UDP RECIBIDO desde el agente con id  : "+agente.ID_propio +
                             " - en la ip "+agente.Ip_Propia+
                             " - en la ip : "+agente.Ip_Propia+
-                            " - en Puerto_Propio : "+agente.Puerto_Propio_TCP+
+                            " - en Puerto_Propio : "+agente.Puerto_Propio_UDP+
                             " - mensaje en cola de envio : "+num_men_por_recibidos_str+
                             " - total mensajes enviados : "+agente.num_elem_lita_enviar()+
                             "\n Destinatario id_destino : "+mensaje_recibido_UDP.destinationId+
                             " - en la ip : "+mensaje_recibido_UDP.destinationIp+
                             " - puerto destino : "+mensaje_recibido_UDP.destinationPortUDP+
-                            " - protocolo : "+mensaje_recibido_UDP.comunicationProtocol+
-                            "\n - mensaje : "+mensaje_recibido_UDP.bodyInfo);
+                            " - protocolo : "+mensaje_recibido_UDP.comunicationProtocol
+                            //"\n - mensaje : "+mensaje_recibido_UDP.bodyInfo
+                            );
 
                     // Llevamos el mensaje al contenedor de recibidos
                     System.out.println("1");
