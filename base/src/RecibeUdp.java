@@ -122,7 +122,7 @@ public class RecibeUdp extends Thread {
                     String momento_actual = String.valueOf(System.currentTimeMillis());
                     String cuerpo_mens = "";
 
-                    File xmlFile = new File("C:/Users/marti/IdeaProjects/SMA_23-24/base/" + fileName + ".xml");
+                    File xmlFile = new File("C:/Users/marti/IdeaProjects/SMA_23-24/base/" + fileName);
                     /*
                     Ruta para:
                     Pablo = C:/Users/pablo/IdeaProjects/SMA_23-24/base/
@@ -162,7 +162,7 @@ public class RecibeUdp extends Thread {
 
                         String num_men_por_recibidos_str = String.valueOf(agente.num_elem_lita_recibidos());
                         System.out.println("\n ==> Mensaje UDP RECIBIDO desde el agente: " + mensaje_recibido_UDP.bodyInfo +
-                                " - mensaje en cola de envio : " + num_men_por_recibidos_str +
+                                "\n- mensaje en cola de envio : " + num_men_por_recibidos_str +
                                 " - total mensajes enviados : " + agente.num_elem_lita_enviar() +
                                 "\n Destinatario id_destino : " + mensaje_recibido_UDP.destinationId +
                                 " - en la ip : " + mensaje_recibido_UDP.destinationIp +
