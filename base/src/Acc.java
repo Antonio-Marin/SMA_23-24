@@ -464,60 +464,63 @@ public class Acc {
     protected void finalizaAgente() {
         Estado_Actual = Estado_del_ACC.FINALIZADO;
 
-        // ///////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////
         // Notificamos al monitor que este agente ha finalizadO
+        if (tipo_agente == tipos_de_agentes.CAMBIACROMOS) {
+            String ID_mensaje = dame_codigo_id_local_men();
+            long momento_actual = System.currentTimeMillis();
+            String momento_actual_str = String.valueOf(System.currentTimeMillis());
+            String tiempo_vivido = String.valueOf(System.currentTimeMillis() - Tiempo_de_nacimiento);
+            String Puerto_Propio_str = String.valueOf(Puerto_Propio_TCP);
+            String Puerto_Monitor_TCP_str = String.valueOf(Puerto_Monitor_TCP);
+            String cuerpo_mens_fin_agente = "Esto es el MENSAJE FIN DE AGENTE  - que el agente con ID_propio : " + ID_propio +
+                    " - con ip : " + Ip_Propia +
+                    " - con Puerto_Propio : " + Puerto_Propio_str +
+                    " - con ID_mensaje : " + ID_mensaje +
+                    " - envia al monitor con Ip_Monitor : " + Ip_Monitor +
+                    " - con Puerto_Monitor : " + Puerto_Monitor_TCP_str +
+                    " - en T : " + momento_actual_str +
+                    " - con T de vida : " + Tiempo_de_vida +
+                    " - con T vivido : " + tiempo_vivido;
 
-        String ID_mensaje = dame_codigo_id_local_men();
-        long momento_actual = System.currentTimeMillis();
-        String momento_actual_str = String.valueOf(System.currentTimeMillis());
-        String tiempo_vivido =  String.valueOf(System.currentTimeMillis() - Tiempo_de_nacimiento);
-        String Puerto_Propio_str = String.valueOf(Puerto_Propio_TCP);
-        String Puerto_Monitor_TCP_str = String.valueOf(Puerto_Monitor_TCP);
-        String cuerpo_mens_fin_agente = "Esto es el MENSAJE FIN DE AGENTE  - que el agente con ID_propio : " + ID_propio +
-                " - con ip : " + Ip_Propia +
-                " - con Puerto_Propio : " + Puerto_Propio_str +
-                " - con ID_mensaje : " + ID_mensaje +
-                " - envia al monitor con Ip_Monitor : "+Ip_Monitor+
-                " - con Puerto_Monitor : "+Puerto_Monitor_TCP_str+
-                " - en T : " + momento_actual_str+
-                " - con T de vida : " + Tiempo_de_vida +
-                " - con T vivido : " + tiempo_vivido;
+            //TODO: mensaje muerte revisar
+            Mensaje mensaje_fin_agente = new Mensaje("2",
+                    "2", "2", "0", "UDP",
+                    ID_propio, Ip_Propia, Integer.toString(Puerto_Propio_TCP + 1), Puerto_Propio_str, momento_actual_str,
+                    "ID_Monitor", Ip_Monitor, Integer.toString(Puerto_Monitor_TCP + 1), Integer.toString(Puerto_Monitor_TCP), momento_actual_str);
+            mensaje_fin_agente.setBodyInfo(cuerpo_mens_fin_agente);
+            mensaje_fin_agente.setDeathReason("2");
+            ArrayList<String> e = new ArrayList();
+            e.add("0");
+            mensaje_fin_agente.setOwnedCardCost(e);
+            mensaje_fin_agente.setOwnedCardQuantity(e);
+            mensaje_fin_agente.setOwnedCardType(e);
+            mensaje_fin_agente.setWantedCardType(e);
+            mensaje_fin_agente.setOwnedMoney("0");
+            mensaje_fin_agente.setCreatedChilds(String.valueOf(this.Num_hijos_generados));
+            mensaje_fin_agente.setDeathTime(String.valueOf(this.Tiempo_de_vida));
+            mensaje_fin_agente.setPastTradeWantedCard("-");
+            mensaje_fin_agente.setPastTradeGivenCard("-");
+            mensaje_fin_agente.setTradeWantedCard("-");
+            mensaje_fin_agente.setTradeGivenCard("-");
+            mensaje_fin_agente.setOfferedCardType(e);
+            mensaje_fin_agente.setOfferedCardCost(e);
+            mensaje_fin_agente.setOfferedCardQuantity(e);
+            mensaje_fin_agente.setWishedCardType(e);
+            mensaje_fin_agente.setTradeMoney("0");
+            ArrayList<AccTest> h = new ArrayList<>();
+            //AccLocalizado ej = new AccLocalizado("id", "ip", 10000000,15550005 );
+            //directorio_de_agentes.add(ej);
+            mensaje_fin_agente.setAgentsDirectory(this.directorio_de_agentes);
+            mensaje_fin_agente.setDeadAgents(this.directorio_de_agentes);
 
-        //TODO: mensaje muerte revisar
-        Mensaje mensaje_fin_agente = new Mensaje("2",
-                "2", "2", "0", "UDP",
-                ID_propio, Ip_Propia, Integer.toString(Puerto_Propio_TCP+1), Puerto_Propio_str, momento_actual_str,
-                "ID_Monitor", Ip_Monitor, Integer.toString(Puerto_Monitor_TCP+1), Integer.toString(Puerto_Monitor_TCP), momento_actual_str);
-        mensaje_fin_agente.setBodyInfo(cuerpo_mens_fin_agente);
-        mensaje_fin_agente.setDeathReason("2");
-        ArrayList<String> e = new ArrayList();
-        e.add("0");
-        mensaje_fin_agente.setOwnedCardCost(e);
-        mensaje_fin_agente.setOwnedCardQuantity(e);
-        mensaje_fin_agente.setOwnedCardType(e);
-        mensaje_fin_agente.setWantedCardType(e);
-        mensaje_fin_agente.setOwnedMoney("0");
-        mensaje_fin_agente.setCreatedChilds(String.valueOf(this.Num_hijos_generados));
-        mensaje_fin_agente.setDeathTime(String.valueOf(this.Tiempo_de_vida));
-        mensaje_fin_agente.setPastTradeWantedCard("-");
-        mensaje_fin_agente.setPastTradeGivenCard("-");
-        mensaje_fin_agente.setTradeWantedCard("-");
-        mensaje_fin_agente.setTradeGivenCard("-");
-        mensaje_fin_agente.setOfferedCardType(e);
-        mensaje_fin_agente.setOfferedCardCost(e);
-        mensaje_fin_agente.setOfferedCardQuantity(e);
-        mensaje_fin_agente.setWishedCardType(e);
-        mensaje_fin_agente.setTradeMoney("0");
-        ArrayList<AccTest> h = new ArrayList<>();
-        //AccLocalizado ej = new AccLocalizado("id", "ip", 10000000,15550005 );
-        //directorio_de_agentes.add(ej);
-        mensaje_fin_agente.setAgentsDirectory(this.directorio_de_agentes);
-        mensaje_fin_agente.setDeadAgents(this.directorio_de_agentes);
+            // Insertamos el mensaje
+            pon_en_lita_enviar(mensaje_fin_agente);
 
-        // Insertamos el mensaje
-        pon_en_lita_enviar(mensaje_fin_agente);
-
-        System.out.println("\n ==> NOTIFICACION LOCAL de FIN DE AGENTE - \n "+ cuerpo_mens_fin_agente);
+            System.out.println("\n ==> NOTIFICACION LOCAL de FIN DE AGENTE - \n " + cuerpo_mens_fin_agente);
+        }else{
+            System.out.println("\n ==> NOTIFICACION LOCAL de FIN DE AGENTE: "+ID_propio);
+        }
 
         // ///////////////////////////////////////////////////////
         // Nos vamos
