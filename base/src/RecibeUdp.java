@@ -123,6 +123,11 @@ public class RecibeUdp extends Thread {
                     String cuerpo_mens = "";
 
                     File xmlFile = new File("C:/Users/marti/IdeaProjects/SMA_23-24/base/" + fileName + ".xml");
+                    /*
+                    Ruta para:
+                    Pablo = C:/Users/pablo/IdeaProjects/SMA_23-24/base/
+                    Antonio = C:/Users/marti/IdeaProjects/SMA_23-24/base
+                     */
 
                     DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
                     DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
